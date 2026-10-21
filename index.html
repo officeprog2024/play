@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7effb">
+  <meta name="description" content="لعبة تعليمية تفاعلية لتصنيف كلمات المفرد والجمع لطالبات الصف الثاني الابتدائي.">
+  <title>لعبة المفرد والجمع | لغتي - ثاني ابتدائي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#443e59; --sub:#777085; --purple:#76569f; --purple-dark:#604184;
+      --pink:#dc699b; --mint:#56a994; --paper:#fffefa; --line:#e9e1ec;
+      --shadow:0 14px 36px rgba(91,71,113,.10);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--ink);font-family:"Cairo","Tajawal",Tahoma,sans-serif;
+      background:radial-gradient(circle at 5% 4%,#f8dfea 0,transparent 21%),
+                 radial-gradient(circle at 96% 16%,#e9dffc 0,transparent 24%),
+                 radial-gradient(circle at 88% 95%,#dbf2ec 0,transparent 30%),#fcfafc;
+      line-height:1.7}
+    button{font:inherit;cursor:pointer}
+    button:focus-visible,[tabindex]:focus-visible{outline:3px solid #b47bda;outline-offset:3px}
+    [hidden]{display:none!important}
+    .app{max-width:1110px;margin:auto;padding:26px 20px 44px}
+    .masthead{background:linear-gradient(115deg,#f4e8f8 0%,#fcecf1 57%,#e9f6f2 100%);
+      border:1px solid #efe3f0;border-radius:30px;padding:30px 34px 26px;
+      box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .masthead:before,.masthead:after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+    .masthead:before{width:230px;height:230px;background:#ffffff52;left:-88px;top:-115px}
+    .masthead:after{width:140px;height:140px;background:#fffbff8c;left:16%;bottom:-109px}
+    .masthead-inner{position:relative;z-index:1}
+    .topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .tag{display:inline-flex;align-items:center;gap:8px;padding:5px 15px;border-radius:100px;
+      color:#76518b;background:#fffbffad;border:1px solid #ead8ec;font-size:13px;font-weight:800}
+    .again-top{border:1px solid #d9c6e6;background:#fff9ffce;border-radius:13px;
+      color:#795797;padding:7px 14px;font-weight:800;transition:transform .16s,background .16s}
+    .again-top:hover{background:#fff;transform:translateY(-2px)}
+    h1{font-weight:900;font-size:clamp(28px,4vw,42px);line-height:1.5;letter-spacing:-.7px;margin:12px 0 1px;color:#624582}
+    .lead{font-size:clamp(15px,1.8vw,18px);font-weight:700;margin:0;color:#796a87}
+    .sparkle{display:inline-block;margin-right:5px;transform:rotate(-14deg)}
+    .guide{display:flex;align-items:flex-start;gap:13px;margin:20px 0 0;padding:13px 17px;
+      background:#ffffffb0;border:1px solid #eee5ed;border-radius:16px;max-width:790px}
+    .guide-icon{font-size:25px;line-height:1.3}
+    .guide strong{color:#72538f}.guide p{font-size:14px;margin:0;line-height:1.9}
+    .stats{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+      padding:23px 5px 13px}
+    .stats-text{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .stats-title{font-size:16px;font-weight:900}.count{background:#f3ebfb;color:#704e9a;border-radius:20px;
+      padding:4px 15px;font-weight:900;font-size:14px}
+    .status-message{font-size:13px;font-weight:700;color:var(--sub);margin:0}
+    .track{height:12px;background:#e9e3ed;border-radius:30px;overflow:hidden;margin:0 2px 23px}
+    .track>span{height:100%;display:block;width:0%;border-radius:30px;
+      background:linear-gradient(90deg,#8bc8b9,#b49cdd,#e8a7c3);transition:width .35s}
+    .source{background:#fff;border:2px solid #e7dfeb;border-radius:24px;padding:22px;
+      box-shadow:var(--shadow);min-height:183px;transition:border-color .2s,background .2s}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+    .section-head h2{margin:0;font-size:20px;font-weight:900;color:#635574}
+    .hint{font-size:12px;font-weight:700;color:#84798d}
+    .words{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:58px}
+    .word-chip{position:relative;appearance:none;border:2px solid #e7d8ed;border-bottom:4px solid #d8c0e3;
+      background:linear-gradient(180deg,#fff,#fffafe);color:#604b74;border-radius:13px;
+      font-size:18px;font-weight:900;padding:8px 20px;min-width:95px;line-height:1.65;
+      box-shadow:0 4px 9px #4e355410;cursor:grab;touch-action:none;user-select:none;
+      -webkit-user-select:none;transition:transform .13s,border-color .13s,background .13s,box-shadow .13s}
+    .word-chip:hover{border-color:#caabdb;transform:translateY(-2px)}
+    .word-chip:active{cursor:grabbing}
+    .word-chip.selected{border-color:#8b65b1;background:#f2e7fa;box-shadow:0 0 0 3px #d8c0e66e}
+    .word-chip.drag-origin{opacity:.35}
+    .word-chip.is-wrong{border-color:#e7909d;border-bottom-color:#d86c7b;background:#fff1f3}
+    .word-chip.is-correct{border-color:#90cbb3;border-bottom-color:#5fb89b;background:#edf9f3}
+    .ghost{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;transform:translate(-50%,-50%) rotate(-4deg);
+      box-shadow:0 15px 28px #53425d36;opacity:.94;border-color:#b58ed2;background:#fffafa}
+    .empty{color:#aaa0ac;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;padding:8px}
+    .empty:before{content:"✦";color:#dbb9db;font-size:22px}
+    .boxes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:19px;margin-top:20px}
+    .dropbox{min-height:237px;border:3px dashed;border-radius:25px;padding:19px 21px 20px;
+      position:relative;transition:background .18s,border-color .18s,transform .18s}
+    .dropbox.singular{background:#f6f0fe;border-color:#c6a9e9}
+    .dropbox.plural{background:#fff0f6;border-color:#e9aaca}
+    .box-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
+    .box-title{display:flex;align-items:center;gap:10px}
+    .emoji{display:inline-flex;width:49px;height:49px;align-items:center;justify-content:center;font-size:27px;
+      background:#fff;border-radius:14px;box-shadow:0 4px 12px #50465e10}
+    .box-title h3{font-size:25px;font-weight:900;margin:0;line-height:1.4}
+    .singular h3{color:#7853a2}.plural h3{color:#c15c8e}
+    .box-counter{font-size:12px;font-weight:900;background:#ffffffc2;border:1px solid #ffffff;
+      border-radius:50px;padding:5px 12px;white-space:nowrap}
+    .box-desc{margin:0 0 15px;color:#807489;font-weight:700;font-size:13px}
+    .dropbox .words{align-content:flex-start;min-height:65px}
+    .dropbox .word-chip{font-size:17px;padding:6px 14px;min-width:86px}
+    [data-drop].drag-over{border-color:#5ba98d!important;background:#e5f7ed!important;transform:scale(1.008)}
+    .dropbox.target-selected{box-shadow:0 0 0 3px #c09fd840;cursor:pointer}
+    .source.target-selected{border-color:#bbadd0}
+    .action{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0 4px}
+    .grade-btn{border:0;border-radius:17px;background:linear-gradient(115deg,#8765b4,#a77bca);
+      padding:12px 34px;min-width:240px;color:white;font-size:17px;font-weight:900;
+      box-shadow:0 10px 20px #7a579e2c;transition:transform .18s,opacity .18s}
+    .grade-btn:not(:disabled):hover{transform:translateY(-2px)}
+    .grade-btn:disabled{background:#d8cfdf;box-shadow:none;color:#f8f4f9;cursor:not-allowed}
+    .reset-inline{background:white;color:#82649b;border:1px solid #e7dcf0;padding:11px 21px;
+      border-radius:16px;font-weight:800}
+    .bottom-hint{text-align:center;margin:8px 0 0;color:#867b90;font-weight:700;font-size:13px}
+    .footer{text-align:center;font-size:12px;font-weight:700;color:#9990a3;margin:28px 0 0}
+    .modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
+      background:rgba(58,43,73,.54);padding:18px;backdrop-filter:blur(5px);overflow-y:auto}
+    .modal-card{width:min(100%,540px);max-height:calc(100dvh - 36px);overflow:auto;
+      background:linear-gradient(180deg,#fff9ff,#fff 55%);border:1px solid white;
+      border-radius:27px;text-align:center;padding:25px 24px;box-shadow:0 22px 55px #36253c49}
+    .reward{font-size:43px;line-height:1.25}.modal h2{margin:2px 0;font-size:27px;color:#704d96;font-weight:900}
+    .modal-intro{margin:0 0 15px;font-size:15px;font-weight:700;color:#85758b}
+    .circle{width:145px;height:145px;display:grid;place-content:center;margin:10px auto 13px;
+      border-radius:50%;background:conic-gradient(#b68ad4 var(--score,0%),#f0e7f2 0);
+      position:relative}
+    .circle:before{content:"";position:absolute;inset:12px;border-radius:50%;background:white}
+    .circle-inner{position:relative;z-index:1;font-size:31px;font-weight:900;color:#6c4991;line-height:1.3}
+    .circle-inner small{display:block;font-size:13px;color:#957aab}
+    .modal-note{font-size:16px;font-weight:900;margin:6px 0 13px;color:#62506f}
+    .missed{margin:14px 0 15px;border-radius:15px;padding:11px 14px;background:#fff4f7;
+      text-align:right;border:1px solid #f8dce7}
+    .missed h3{margin:0 0 5px;font-size:15px;color:#a74b73}
+    .missed ul{margin:0;padding-right:22px;font-size:14px;font-weight:700;color:#765b70}
+    .missed li{margin:2px 0}
+    .modal-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .modal-actions button{border-radius:13px;padding:9px 18px;font-weight:900;border:0}
+    .restart-result{color:white;background:#8e6ab6}
+    .review-result{color:#72588b;background:#f3ebf7;border:1px solid #e5d7ef!important}
+    @media(max-width:720px){
+      .app{padding:13px 11px 25px}.masthead{padding:22px 17px;border-radius:23px}
+      h1{font-size:29px}.guide{padding:10px 12px;gap:8px}
+      .source{padding:15px;border-radius:20px}.boxes{grid-template-columns:1fr;gap:13px}
+      .dropbox{padding:16px 15px;min-height:188px;border-radius:20px}
+      .section-head h2{font-size:18px}.word-chip{font-size:17px;min-width:84px;padding:7px 14px}
+      .stats{padding-top:15px}.status-message{width:100%}.modal-card{padding:20px 15px}
+    }
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="masthead">
+      <div class="masthead-inner">
+        <div class="topline">
+          <span class="tag">🌷 لغتي الجميلة · الصف الثاني الابتدائي</span>
+          <button class="again-top" id="topReset" type="button">↻ إعادة اللعبة</button>
+        </div>
+        <h1>مغامرة المفرد والجمع <span class="sparkle" aria-hidden="true">✨</span></h1>
+        <p class="lead">هيا يا مبدعة، ضعي كل كلمة في بيتها الصحيح!</p>
+        <div class="guide">
+          <span class="guide-icon" aria-hidden="true">💡</span>
+          <p><strong>كيف ألعب؟</strong> اسحبي الكلمات إلى مربع <strong>المفرد</strong> أو <strong>الجمع</strong>. ويمكنكِ أيضًا الضغط على الكلمة ثم الضغط على المربع المناسب. راجعي إجاباتكِ قبل إظهار الدرجة.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="stats" aria-live="polite">
+      <div class="stats-text">
+        <span class="stats-title">تقدّمكِ في اللعبة</span>
+        <span class="count" id="progressText">٠ من ١٦ كلمات</span>
+      </div>
+      <p class="status-message" id="announce">ابدئي بتصنيف البطاقات الملونة 🌸</p>
+    </div>
+    <div class="track" role="progressbar" aria-label="نسبة تصنيف الكلمات" aria-valuemin="0" aria-valuemax="16" aria-valuenow="0" id="progressTrack"><span id="progressBar"></span></div>
+
+    <section class="source" id="source" data-drop="bank" tabindex="0" aria-label="الكلمات غير المصنفة، اضغطي هنا لإعادة الكلمة المحددة">
+      <div class="section-head">
+        <h2>🧺 سلة الكلمات</h2>
+        <span class="hint">اختاري بطاقة واسحبيها إلى مكانها</span>
+      </div>
+      <div class="words" id="bankWords"></div>
+    </section>
+
+    <div class="boxes" aria-label="صندوقا تصنيف الكلمات">
+      <section class="dropbox singular" id="singular" data-drop="singular" tabindex="0" aria-label="مربع المفرد، اضغطي هنا لتصنيف الكلمة المحددة مفردًا">
+        <div class="box-top">
+          <div class="box-title"><span class="emoji" aria-hidden="true">🌼</span><h3>المفرد</h3></div>
+          <span class="box-counter" id="singularCount">٠ كلمات</span>
+        </div>
+        <p class="box-desc">كلمة تدلّ على واحد أو واحدة</p>
+        <div class="words" id="singularWords"></div>
+      </section>
+      <section class="dropbox plural" id="plural" data-drop="plural" tabindex="0" aria-label="مربع الجمع، اضغطي هنا لتصنيف الكلمة المحددة جمعًا">
+        <div class="box-top">
+          <div class="box-title"><span class="emoji" aria-hidden="true">🌸</span><h3>الجمع</h3></div>
+          <span class="box-counter" id="pluralCount">٠ كلمات</span>
+        </div>
+        <p class="box-desc">كلمة تدلّ على أكثر من اثنين أو اثنتين</p>
+        <div class="words" id="pluralWords"></div>
+      </section>
+    </div>
+
+    <div class="action">
+      <button class="grade-btn" id="gradeButton" type="button" disabled>⭐ أظهري درجتي</button>
+      <button class="reset-inline" id="resetButton" type="button">↻ ابدئي من جديد</button>
+    </div>
+    <p class="bottom-hint" id="bottomHint">عندما تنتهين من تصنيف جميع الكلمات، سيظهر زر النتيجة.</p>
+    <p class="footer">نشاط تفاعلي في مهارة المفرد والجمع · يعمل على الحاسب والجوال والأجهزة اللوحية</p>
+  </main>
+
+  <div class="modal" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle" hidden>
+    <div class="modal-card">
+      <div class="reward" id="rewardIcon" aria-hidden="true">🏆</div>
+      <h2 id="resultTitle">أحسنتِ يا مبدعة!</h2>
+      <p class="modal-intro">هذه نتيجتكِ في لعبة المفرد والجمع</p>
+      <div class="circle" id="scoreCircle" style="--score:0%"><div class="circle-inner"><span id="scorePercent">٠٪</span><small id="scoreFraction">٠ من ١٦</small></div></div>
+      <p class="modal-note" id="resultNote"></p>
+      <div class="missed" id="missedBlock" hidden>
+        <h3>🌱 كلمات نتعلم منها:</h3>
+        <ul id="missedList"></ul>
+      </div>
+      <div class="modal-actions">
+        <button class="restart-result" id="resultReset" type="button">🌷 أعيدي اللعبة</button>
+        <button class="review-result" id="resultReview" type="button">راجعي تصنيفكِ</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+      // كل زوج يحتوي على مفرد وجمع؛ يُخلط ترتيب البطاقات في كل محاولة.
+      const PAIRS = [
+        ["منزل", "منازل"], ["حريق", "حرائق"], ["صديق", "أصدقاء"],
+        ["رجل", "رجال"], ["جار", "جيران"], ["كتاب", "كتب"],
+        ["قلم", "أقلام"], ["شجرة", "أشجار"]
+      ];
+      const WORDS = PAIRS.flatMap((pair, index) => [
+        { id: `s${index}`, text: pair[0], type: "singular" },
+        { id: `p${index}`, text: pair[1], type: "plural" }
+      ]);
+      const TOTAL = WORDS.length;
+      const byId = new Map(WORDS.map(word => [word.id, word]));
+      const $ = id => document.getElementById(id);
+      const num = value => new Intl.NumberFormat("ar-SA", {useGrouping: false}).format(value);
+      const typeName = type => type === "singular" ? "المفرد" : "الجمع";
+      const zones = [$("source"), $("singular"), $("plural")];
+      const state = { order: [], answers: new Map(), selected: null, graded: false, drag: null, suppressId: null, suppressUntil: 0 };
+
+      function shuffle(items) {
+        const shuffled = [...items];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      }
+      function announce(message) { $("announce").textContent = message; }
+      function chipsFor(place) {
+        return state.order.filter(word => (state.answers.get(word.id) || "bank") === place);
+      }
+      function makeChip(word) {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "word-chip";
+        chip.textContent = word.text;
+        chip.dataset.id = word.id;
+        chip.setAttribute("aria-pressed", state.selected === word.id ? "true" : "false");
+        chip.setAttribute("aria-label", `${word.text}، اضغطي لتحديد البطاقة`);
+        if (state.selected === word.id) chip.classList.add("selected");
+        if (state.graded) {
+          chip.classList.add(state.answers.get(word.id) === word.type ? "is-correct" : "is-wrong");
+          chip.setAttribute("aria-label", `${word.text}، ${state.answers.get(word.id) === word.type ? "صحيحة" : "غير صحيحة"}`);
+        }
+        chip.addEventListener("pointerdown", startDrag);
+        chip.addEventListener("click", () => {
+          if (state.graded) return;
+          if (state.suppressId === word.id && Date.now() < state.suppressUntil) return;
+          if (state.selected === word.id) {
+            // الضغط مرة أخرى على بطاقة مصنفة يعيدها إلى السلة.
+            if (state.answers.has(word.id)) {
+              state.answers.delete(word.id);
+              state.selected = null;
+              announce(`أعدتِ «${word.text}» إلى سلة الكلمات.`);
+            } else {
+              state.selected = null;
+              announce("اختاري كلمة جديدة 🌷");
+            }
+          } else {
+            state.selected = word.id;
+            announce(`اخترتِ «${word.text}». اضغطي على مربع المفرد أو الجمع.`);
+          }
+          render();
+        });
+        return chip;
+      }
+      function fill(place, id) {
+        const host = $(id);
+        host.replaceChildren();
+        const list = chipsFor(place);
+        if (!list.length) {
+          const empty = document.createElement("div");
+          empty.className = "empty";
+          empty.textContent = place === "bank" ? "رائع! صنّفتِ كل الكلمات." : "اسحبي الكلمات هنا أو انقري على المربع";
+          host.appendChild(empty);
+        } else {
+          list.forEach(word => host.appendChild(makeChip(word)));
+        }
+      }
+      function render() {
+        fill("bank", "bankWords");
+        fill("singular", "singularWords");
+        fill("plural", "pluralWords");
+        const count = state.answers.size;
+        const singularCount = chipsFor("singular").length;
+        const pluralCount = chipsFor("plural").length;
+        $("progressText").textContent = `${num(count)} من ${num(TOTAL)} كلمة`;
+        $("progressTrack").setAttribute("aria-valuenow", String(count));
+        $("progressTrack").setAttribute("aria-valuemax", String(TOTAL));
+        $("progressBar").style.width = `${100 * count / TOTAL}%`;
+        $("singularCount").textContent = `${num(singularCount)} كلمات`;
+        $("pluralCount").textContent = `${num(pluralCount)} كلمات`;
+        zones.forEach(zone => zone.classList.toggle("target-selected", !!state.selected && !state.graded));
+        $("gradeButton").disabled = count !== TOTAL || state.graded;
+        if (state.graded) {
+          $("gradeButton").disabled = false;
+          $("gradeButton").textContent = "🏆 شاهدي نتيجتكِ";
+          $("bottomHint").textContent = "البطاقات الخضراء صحيحة، والوردية تحتاج إلى مراجعة. أعيدي اللعبة لتجربي مرة أخرى!";
+        } else {
+          $("gradeButton").textContent = "⭐ أظهري درجتي";
+          $("bottomHint").textContent = count === TOTAL
+            ? "ممتاز! انتهيتِ من التصنيف. اضغطي «أظهري درجتي» 🌟"
+            : `تبقّى ${num(TOTAL - count)} من الكلمات. يمكنكِ تغيير مكان أي كلمة قبل التصحيح.`;
+        }
+      }
+      function put(id, destination) {
+        if (state.graded || !byId.has(id)) return;
+        const word = byId.get(id);
+        if (destination === "bank") {
+          state.answers.delete(id);
+          announce(`عادت «${word.text}» إلى سلة الكلمات.`);
+        } else if (destination === "singular" || destination === "plural") {
+          state.answers.set(id, destination);
+          announce(`وضعتِ «${word.text}» في مربع ${typeName(destination)}.`);
+        } else return;
+        state.selected = null;
+        render();
+      }
+      // اللمس والنقر: اختاري البطاقة، ثم المربع المناسب.
+      zones.forEach(zone => {
+        zone.addEventListener("click", event => {
+          if (event.target.closest(".word-chip") || state.graded || !state.selected) return;
+          put(state.selected, zone.dataset.drop);
+        });
+        zone.addEventListener("keydown", event => {
+          if ((event.key === "Enter" || event.key === " ") && event.target === zone && state.selected && !state.graded) {
+            event.preventDefault();
+            put(state.selected, zone.dataset.drop);
+          }
+        });
+      });
+      // السحب باستخدام Pointer Events: يعمل بالماوس واللمس والقلم.
+      function startDrag(event) {
+        if (state.graded || (event.pointerType === "mouse" && event.button !== 0)) return;
+        const chip = event.currentTarget;
+        state.drag = {id: chip.dataset.id, pointer: event.pointerId, x: event.clientX, y: event.clientY,
+          moved: false, chip, ghost: null, currentZone: null, currentX: event.clientX, currentY: event.clientY, frame: null};
+        chip.setPointerCapture(event.pointerId);
+        chip.addEventListener("pointermove", moveDrag);
+        chip.addEventListener("pointerup", finishDrag);
+        chip.addEventListener("pointercancel", cancelDrag);
+      }
+      function moveDrag(event) {
+        const d = state.drag;
+        if (!d || d.pointer !== event.pointerId) return;
+        if (!d.moved && Math.hypot(event.clientX - d.x, event.clientY - d.y) < 9) return;
+        if (!d.moved) {
+          d.moved = true;
+          d.chip.classList.add("drag-origin");
+          d.ghost = d.chip.cloneNode(true);
+          d.ghost.className = "word-chip ghost";
+          d.ghost.removeAttribute("id");
+          document.body.appendChild(d.ghost);
+          // التمرير التلقائي يتيح سحب البطاقات إلى الصناديق أسفل الشاشة في الجوال.
+          autoScroll(d);
+        }
+        d.currentX = event.clientX;
+        d.currentY = event.clientY;
+        updateDragTarget(d);
+      }
+      function updateDragTarget(d) {
+        d.ghost.style.left = `${d.currentX}px`;
+        d.ghost.style.top = `${d.currentY}px`;
+        const hit = document.elementFromPoint(d.currentX, d.currentY);
+        const target = hit && hit.closest("[data-drop]");
+        zones.forEach(z => z.classList.toggle("drag-over", z === target));
+        d.currentZone = target ? target.dataset.drop : null;
+      }
+      function autoScroll(d) {
+        if (state.drag !== d || !d.moved) return;
+        const margin = 90;
+        const y = d.currentY;
+        const speed = y > window.innerHeight - margin
+          ? Math.min(18, 3 + (y - (window.innerHeight - margin)) * .19)
+          : y < margin ? -Math.min(18, 3 + (margin - y) * .19) : 0;
+        if (speed) {
+          window.scrollBy(0, speed);
+          updateDragTarget(d);
+        }
+        d.frame = requestAnimationFrame(() => autoScroll(d));
+      }
+      function clearDrag(d) {
+        if (!d) return;
+        d.chip.removeEventListener("pointermove", moveDrag);
+        d.chip.removeEventListener("pointerup", finishDrag);
+        d.chip.removeEventListener("pointercancel", cancelDrag);
+        d.chip.classList.remove("drag-origin");
+        if (d.frame !== null) cancelAnimationFrame(d.frame);
+        if (d.ghost) d.ghost.remove();
+        zones.forEach(z => z.classList.remove("drag-over"));
+        state.drag = null;
+      }
+      function finishDrag(event) {
+        const d = state.drag;
+        if (!d || d.pointer !== event.pointerId) return;
+        const moved = d.moved, dest = d.currentZone, id = d.id;
+        clearDrag(d);
+        if (moved) {
+          state.suppressId = id;
+          state.suppressUntil = Date.now() + 450;
+          if (dest) put(id, dest);
+          else announce("اسحبي البطاقة إلى أحد المربعين الملونين 🌷");
+        }
+      }
+      function cancelDrag(event) { if (state.drag && state.drag.pointer === event.pointerId) clearDrag(state.drag); }
+      function showResult() {
+        if (!state.graded && state.answers.size !== TOTAL) return;
+        if (!state.graded) {state.graded = true; state.selected = null; render();}
+        const missed = WORDS.filter(w => state.answers.get(w.id) !== w.type);
+        const correct = TOTAL - missed.length;
+        const percent = Math.round(correct / TOTAL * 100);
+        $("scorePercent").textContent = `${num(percent)}٪`;
+        $("scoreFraction").textContent = `${num(correct)} من ${num(TOTAL)}`;
+        $("scoreCircle").style.setProperty("--score", `${percent}%`);
+        $("rewardIcon").textContent = percent === 100 ? "🏆✨" : percent >= 75 ? "🌟🌷" : "💗🌱";
+        $("resultTitle").textContent = percent === 100 ? "إبداع يا بطلة!" : percent >= 75 ? "أحسنتِ يا مبدعة!" : "محاولة جميلة!";
+        $("resultNote").textContent = percent === 100
+          ? "كل إجاباتكِ صحيحة! أنتِ نجمة المفرد والجمع ⭐"
+          : percent >= 75 ? "عمل رائع! راجعي الكلمات القليلة المتبقية لتتألقي أكثر."
+          : "التدريب يجعلنا أفضل. تعرفي على الكلمات ثم جربي من جديد!";
+        const list = $("missedList");
+        list.replaceChildren();
+        missed.forEach(word => {
+          const li = document.createElement("li");
+          li.textContent = `«${word.text}» مكانها الصحيح: ${typeName(word.type)}`;
+          list.appendChild(li);
+        });
+        $("missedBlock").hidden = missed.length === 0;
+        $("resultModal").hidden = false;
+        $("resultReset").focus();
+        announce(`النتيجة ${num(correct)} من ${num(TOTAL)}.`);
+      }
+      function hideResult() { $("resultModal").hidden = true; $("gradeButton").focus(); }
+      function restart() {
+        $("resultModal").hidden = true;
+        if (state.drag) clearDrag(state.drag);
+        state.answers.clear();
+        state.selected = null;
+        state.graded = false;
+        state.suppressId = null;
+        state.order = shuffle(WORDS);
+        render();
+        announce("جولة جديدة! صنّفي الكلمات من جديد يا بطلة 🌷");
+        window.scrollTo({top: 0, behavior: "smooth"});
+      }
+      $("gradeButton").addEventListener("click", showResult);
+      $("resetButton").addEventListener("click", restart);
+      $("topReset").addEventListener("click", restart);
+      $("resultReset").addEventListener("click", restart);
+      $("resultReview").addEventListener("click", hideResult);
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && !$("resultModal").hidden) hideResult();
+      });
+      restart();
+    })();
+  </script>
+</body>
+</html>
