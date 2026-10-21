@@ -64,10 +64,10 @@
 
     <main class="w-full max-w-6xl flex-1 flex flex-col items-center justify-center gap-4 sm:gap-6">
         
-        <!-- Score & Instructions -->
-        <div class="w-full bg-white/90 px-4 sm:px-6 py-3.5 rounded-2xl shadow border border-purple-100 text-center">
-            <p class="text-gray-800 font-bold text-base sm:text-xl">اسحبي الكلمة أو اضغطي عليها ثم اضغطي في الصندوق المناسب (مفرد أو جمع)!</p>
-            <div class="text-purple-600 font-extrabold mt-1 text-base sm:text-lg">النقاط: <span id="score">0</span> / <span id="totalWords">0</span></div>
+        <!-- Instructions and final results only -->
+        <div class="w-full bg-white/90 px-4 sm:px-6 py-4 rounded-2xl shadow border border-purple-100 text-center">
+            <p class="text-gray-800 font-bold text-base sm:text-xl mb-3">انقلي كل كلمة إلى المربع المناسب، ثم اضغطي «عرض نتائجي» عند الانتهاء.</p>
+            <button id="showResultsButton" onclick="showFinalResults()" class="bg-purple-600 hover:bg-purple-700 text-white font-black px-6 py-3 rounded-xl shadow-md transition cursor-pointer">🏆 عرض نتائجي</button>
         </div>
 
         <!-- Word Pool Container (Expanded to full available width) -->
@@ -111,6 +111,24 @@
         <span class="hidden sm:inline">|</span>
         <span class="text-purple-800 font-extrabold">معلمة المادة: فاطمة الحربي</span>
     </footer>
+
+    <!-- Final Results Modal -->
+    <div id="finalResultsModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="finalResultTitle">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border-4 border-purple-200 flex flex-col items-center gap-4 text-center">
+        <div id="finalResultIcon" class="text-6xl" aria-hidden="true">🏆</div>
+        <h3 id="finalResultTitle" class="text-2xl font-black text-purple-800">نتيجتك النهائية</h3>
+        <p id="finalResultMessage" class="text-gray-700 font-bold leading-relaxed"></p>
+        <div class="w-full rounded-2xl bg-purple-50 border border-purple-100 p-4">
+          <p class="text-purple-800 font-extrabold text-lg">درجتك</p>
+          <p class="text-3xl font-black text-purple-700"><span id="finalScore">0</span> / <span id="finalTotal">0</span></p>
+          <p id="finalPercentage" class="text-sm text-purple-600 font-bold mt-1"></p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3 w-full">
+          <button onclick="closeFinalResults()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold px-5 py-2.5 rounded-xl">العودة للكلمات</button>
+          <button onclick="closeFinalResults(); resetGame();" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2.5 rounded-xl">إعادة المحاولة 🔄</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Password Modal -->
     <div id="passwordModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
@@ -401,7 +419,6 @@
 
     function initGame() {
             score = 0;
-            updateScoreDisplay();
             activeWords = [];
             wordsData.forEach(item => {
                 activeWords.push({ id: item.id + '_s', wordId: item.id, text: item.singular, type: 'singular', placed: false });
@@ -409,7 +426,6 @@
             });
             // Shuffle
             activeWords.sort(() => Math.random() - 0.5);
-            document.getElementById('totalWords').innerText = activeWords.length;
             
             // Clear zones
             document.getElementById('singularZone').innerHTML = '<span class="text-sky-400 text-sm sm:text-base font-semibold select-none">ضَعِي الكلمات المفردة هنا</span>';
@@ -424,7 +440,7 @@
             
             const unplacedWords = activeWords.filter(w => !w.placed);
             if (unplacedWords.length === 0) {
-                pool.innerHTML = '<div class="text-purple-700 font-extrabold text-lg sm:text-xl text-center animate-bounce">🎉 رائع جداً! لقد أكملتِ جميع الكلمات بنجاح يا بطلة! ⭐</div>';
+                pool.innerHTML = '<div class="text-purple-300 text-sm font-semibold" aria-hidden="true">&nbsp;</div>';
                 return;
             }
 
@@ -492,52 +508,57 @@
             const wordObj = activeWords.find(w => w.id === wordUniqueId);
             if (!wordObj || wordObj.placed) return;
 
-            const mainContainer = document.getElementById('mainContainer');
+            // التقييم صامت أثناء النقل: تُنقل الكلمة دون صوت أو ألوان أو رسالة.
+            wordObj.placed = true;
+            wordObj.placedType = targetType;
 
-            if (wordObj.type === targetType) {
-                // Correct Answer! Play success applause sound
-                playSuccessSound();
-                wordObj.placed = true;
-                score++;
-                updateScoreDisplay();
+            const zoneContainer = document.getElementById(targetType === 'singular' ? 'singularZone' : 'pluralZone');
+            const placeholder = zoneContainer.querySelector('span');
+            if (placeholder) placeholder.remove();
 
-                // Flash Green
-                mainContainer.classList.remove('bg-gradient-to-br', 'from-pink-100', 'via-purple-100', 'to-sky-100', 'bg-red-300');
-                mainContainer.classList.add('bg-green-300');
-                setTimeout(() => {
-                    mainContainer.classList.remove('bg-green-300');
-                    mainContainer.classList.add('bg-gradient-to-br', 'from-pink-100', 'via-purple-100', 'to-sky-100');
-                }, 700);
+            const placedEl = document.createElement('div');
+            placedEl.className = `px-3.5 sm:px-5 py-2 ${targetType === 'singular' ? 'bg-sky-100 border-sky-400 text-sky-900' : 'bg-pink-100 border-pink-400 text-pink-900'} border-2 font-black rounded-xl shadow-sm text-base sm:text-lg`;
+            placedEl.innerText = wordObj.text;
+            placedEl.dataset.wordId = wordObj.id;
+            zoneContainer.appendChild(placedEl);
 
-                // Append to zone
-                const zoneContainer = document.getElementById(targetType === 'singular' ? 'singularZone' : 'pluralZone');
-                const placeholder = zoneContainer.querySelector('span');
-                if (placeholder) placeholder.remove();
-
-                const placedEl = document.createElement('div');
-                placedEl.className = `px-3.5 sm:px-5 py-2 ${targetType === 'singular' ? 'bg-sky-100 border-sky-400 text-sky-900' : 'bg-pink-100 border-pink-400 text-pink-900'} border-2 font-black rounded-xl shadow-sm text-base sm:text-lg animate-pulse`;
-                placedEl.innerText = wordObj.text;
-                zoneContainer.appendChild(placedEl);
-
-                renderWordPool();
-            } else {
-                // Incorrect Answer! Play error sound
-                playErrorSound();
-
-                // Flash Red
-                mainContainer.classList.remove('bg-gradient-to-br', 'from-pink-100', 'via-purple-100', 'to-sky-100', 'bg-green-300');
-                mainContainer.classList.add('bg-red-300');
-                setTimeout(() => {
-                    mainContainer.classList.remove('bg-red-300');
-                    mainContainer.classList.add('bg-gradient-to-br', 'from-pink-100', 'via-purple-100', 'to-sky-100');
-                }, 700);
-
-                renderWordPool();
-            }
+            // لا يتم إظهار الدرجة أو أي تقييم مرحلي؛ تُحسب النتيجة عند الطلب فقط.
+            renderWordPool();
         }
 
-        function updateScoreDisplay() {
-            document.getElementById('score').innerText = score;
+        function showFinalResults() {
+            const total = activeWords.length;
+            const correct = activeWords.filter(word => word.placed && word.placedType === word.type).length;
+            const percentage = total ? Math.round((correct / total) * 100) : 0;
+
+            let icon = '💪';
+            let message = 'بداية جيدة! راجعي الكلمات وحاولي مرة أخرى لتزيد درجتك.';
+            if (percentage === 100) {
+                icon = '🏆';
+                message = 'مذهلة! إجاباتك كلها صحيحة. أحسنتِ يا بطلة!';
+            } else if (percentage >= 80) {
+                icon = '🌟';
+                message = 'أداء رائع! أنتِ قريبة جداً من الإتقان، واصلي التألق.';
+            } else if (percentage >= 60) {
+                icon = '👏';
+                message = 'أحسنتِ المحاولة! راجعي الكلمات التي تحتاج إلى تدريب ثم أعيدي المحاولة.';
+            } else if (percentage >= 40) {
+                icon = '🌷';
+                message = 'جهد جميل! المزيد من التدريب سيساعدك على التقدم.';
+            }
+
+            document.getElementById('finalResultIcon').innerText = icon;
+            document.getElementById('finalResultMessage').innerText = message;
+            document.getElementById('finalScore').innerText = correct;
+            document.getElementById('finalTotal').innerText = total;
+            document.getElementById('finalPercentage').innerText = 'نسبة الإجابات الصحيحة: ' + percentage + '%';
+            document.getElementById('finalResultsModal').classList.remove('hidden');
+            document.getElementById('finalResultsModal').classList.add('flex');
+        }
+
+        function closeFinalResults() {
+            document.getElementById('finalResultsModal').classList.remove('flex');
+            document.getElementById('finalResultsModal').classList.add('hidden');
         }
 
         function resetGame() {
