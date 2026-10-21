@@ -33,15 +33,22 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-pink-100 via-purple-100 to-sky-100 min-h-screen flex flex-col items-center justify-between p-3 sm:p-6 transition-colors duration-500" id="mainContainer">
+<body class="bg-gradient-to-br from-pink-100 via-purple-100 to-sky-100 min-h-screen flex flex-col items-center justify-between px-3 pb-3 pt-20 sm:px-6 sm:pb-6 sm:pt-20 transition-colors duration-500" id="mainContainer">
 
     
-    <nav aria-label="التنقل بين صفحات الموقع" class="w-full max-w-6xl flex flex-wrap items-center justify-center gap-2 mb-4 bg-white/90 backdrop-blur rounded-2xl border border-purple-200 shadow p-3">
-      <a href="index.html" class="rounded-xl px-4 py-2 font-bold text-purple-800 hover:bg-purple-100">🏠 الرئيسية</a>
-      <a href="play.html" class="rounded-xl px-4 py-2 font-bold text-amber-800 hover:bg-amber-100">🎮 صفحة اللعب</a>
-      <a href="test.html" class="rounded-xl px-4 py-2 font-bold text-purple-800 hover:bg-purple-100">📝 صفحة التقييم</a>
+    <nav aria-label="التنقل بين صفحات الموقع" class="fixed top-0 inset-x-0 z-40 w-full max-w-none flex flex-wrap items-center justify-center gap-1 sm:gap-2 bg-white/95 backdrop-blur border-b border-purple-200 shadow-md p-2 sm:p-3 rounded-none">
+      <a href="index.html" class="rounded-lg px-3 py-2 font-bold text-purple-800 hover:bg-purple-100 text-sm sm:text-base">🏠 الرئيسية</a>
+      <a href="play.html" class="rounded-lg px-3 py-2 font-bold text-amber-800 hover:bg-amber-100 text-sm sm:text-base">🎮 اللعب</a>
+      <a href="test.html" class="rounded-lg px-3 py-2 font-bold text-purple-800 hover:bg-purple-100 text-sm sm:text-base">📝 التقييم</a>
+      <details class="relative">
+        <summary class="list-none cursor-pointer rounded-lg px-3 py-2 font-bold text-gray-800 bg-gray-100 hover:bg-gray-200 text-sm sm:text-base">⚙️ إدارة الكلمات ▾</summary>
+        <div class="absolute left-0 mt-2 w-56 max-w-[85vw] rounded-xl border border-purple-200 bg-white p-2 shadow-xl flex flex-col gap-1">
+          <a href="play.html?manage=1" class="rounded-lg px-3 py-2 font-bold text-amber-800 hover:bg-amber-50">إدارة كلمات اللعب</a>
+          <a href="test.html?manage=1" class="rounded-lg px-3 py-2 font-bold text-purple-800 hover:bg-purple-50">إدارة كلمات التقييم</a>
+        </div>
+      </details>
     </nav>
-<header class="w-full max-w-6xl flex flex-col justify-center items-center bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 sm:p-5 mb-4 sm:mb-6 border-2 border-pink-200 gap-3 text-center">
+<header class="w-full max-w-6xl flex flex-col justify-center items-center bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 sm:p-5 mb-3 sm:mb-4 border-2 border-pink-200 gap-2 text-right">
         <div class="w-full flex flex-col sm:flex-row justify-between items-center gap-3 border-b border-pink-100 pb-3">
             <div class="flex items-center gap-3">
                 <span class="text-3xl sm:text-4xl">⭐</span>
@@ -51,27 +58,24 @@
                 <button onclick="resetGame()" class="flex-1 sm:flex-none bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-4 py-2 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer text-xs sm:text-base">
                     🔄 بدء من جديد
                 </button>
-                <button onclick="openAdminModal()" class="flex-1 sm:flex-none bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer text-xs sm:text-base">
-                    ⚙️ إدارة الكلمات
-                </button>
+                
             </div>
         </div>
         <!-- Subtitle Activity Info -->
-        <p id="activitySubtitle" class="text-purple-900 font-extrabold text-xs sm:text-sm bg-purple-50/80 px-4 py-1.5 rounded-xl border border-purple-200 leading-relaxed max-w-5xl">
+        <p id="activitySubtitle" class="w-full self-stretch text-right text-purple-900 font-extrabold text-xs sm:text-sm bg-purple-50/80 px-4 py-1.5 rounded-xl border border-purple-200 leading-relaxed max-w-5xl">
             نشاط ترفيهي إثرائي لمكون أُحَوِّلُ ضمن الدرس الثاني الجار الصغير من الوحدة الثانية أصدقائي وجيراني
         </p>
     </header>
 
     <main class="w-full max-w-6xl flex-1 flex flex-col items-center justify-center gap-4 sm:gap-6">
         
-        <!-- Instructions and final results only -->
-        <div class="w-full bg-white/90 px-4 sm:px-6 py-4 rounded-2xl shadow border border-purple-100 text-center">
-            <p class="text-gray-800 font-bold text-base sm:text-xl mb-3">انقلي كل كلمة إلى المربع المناسب، ثم اضغطي «عرض نتائجي» عند الانتهاء.</p>
-            <button id="showResultsButton" onclick="showFinalResults()" class="bg-purple-600 hover:bg-purple-700 text-white font-black px-6 py-3 rounded-xl shadow-md transition cursor-pointer">🏆 عرض نتائجي</button>
+        <!-- Instructions only; results are available below the sorting areas. -->
+        <div class="w-full bg-white/90 px-4 sm:px-6 py-2 rounded-2xl shadow border border-purple-100 text-right">
+            <p class="text-gray-800 font-bold text-sm sm:text-base">انقلي كل كلمة إلى المربع المناسب، ثم اعرضي نتيجتك بعد الانتهاء.</p>
         </div>
 
         <!-- Word Pool Container (Expanded to full available width) -->
-        <div class="w-full bg-white/85 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-xl border-4 border-dashed border-purple-300 min-h-[130px] sm:min-h-[160px] flex flex-wrap gap-2.5 sm:gap-3.5 items-center justify-center" id="wordPool">
+        <div class="w-full bg-white/85 backdrop-blur-md rounded-3xl p-3 sm:p-4 shadow-xl border-4 border-dashed border-purple-300 min-h-[100px] sm:min-h-[120px] flex flex-wrap gap-2.5 sm:gap-3.5 items-center justify-center" id="wordPool">
             <!-- Words will be dynamically injected here -->
         </div>
 
@@ -79,7 +83,7 @@
         <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             
             <!-- Singular Drop Zone -->
-            <div class="bg-sky-50 rounded-3xl p-4 sm:p-6 shadow-lg border-4 border-sky-300 flex flex-col items-center min-h-[220px] sm:min-h-[280px] transition-all"
+            <div class="bg-sky-50 rounded-3xl p-3 sm:p-4 shadow-lg border-4 border-sky-300 flex flex-col items-center min-h-[180px] sm:min-h-[220px] transition-all"
                  ondragover="allowDrop(event)" ondragleave="removeHighlight(event)" ondrop="dropWord(event, 'singular')" onclick="selectZone('singular')">
                 <div class="flex items-center gap-2 mb-3 sm:mb-4">
                     <span class="text-2xl sm:text-3xl">📘</span>
@@ -91,7 +95,7 @@
             </div>
 
             <!-- Plural Drop Zone -->
-            <div class="bg-pink-50 rounded-3xl p-4 sm:p-6 shadow-lg border-4 border-pink-300 flex flex-col items-center min-h-[220px] sm:min-h-[280px] transition-all"
+            <div class="bg-pink-50 rounded-3xl p-3 sm:p-4 shadow-lg border-4 border-pink-300 flex flex-col items-center min-h-[180px] sm:min-h-[220px] transition-all"
                  ondragover="allowDrop(event)" ondragleave="removeHighlight(event)" ondrop="dropWord(event, 'plural')" onclick="selectZone('plural')">
                 <div class="flex items-center gap-2 mb-3 sm:mb-4">
                     <span class="text-2xl sm:text-3xl">📚</span>
@@ -104,6 +108,11 @@
 
         </div>
 
+        <div class="w-full flex flex-wrap justify-center gap-3 py-1">
+            <button id="showResultsButton" onclick="showFinalResults()" class="bg-purple-600 hover:bg-purple-700 text-white font-black px-6 py-3 rounded-xl shadow-md transition cursor-pointer">🏆 عرض نتائجي</button>
+            <button onclick="resetGame()" class="bg-amber-400 hover:bg-amber-500 text-amber-950 font-black px-6 py-3 rounded-xl shadow-md transition cursor-pointer">🔄 اللعب من جديد</button>
+        </div>
+
     </main>
 
     <footer class="w-full text-center mt-6 text-gray-700 text-xs sm:text-sm font-bold flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-4 bg-white/60 py-2 px-4 rounded-xl border border-purple-100">
@@ -113,7 +122,7 @@
     </footer>
 
     <!-- Final Results Modal -->
-    <div id="finalResultsModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="finalResultTitle">
+    <div id="finalResultsModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-start justify-center p-3 sm:p-5 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="finalResultTitle">
       <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border-4 border-purple-200 flex flex-col items-center gap-4 text-center">
         <div id="finalResultIcon" class="text-6xl" aria-hidden="true">🏆</div>
         <h3 id="finalResultTitle" class="text-2xl font-black text-purple-800">نتيجتك النهائية</h3>
@@ -144,8 +153,8 @@
     </div>
 
     <!-- Admin Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50 overflow-y-auto">
-        <div class="bg-white rounded-3xl p-4 sm:p-6 max-w-3xl w-full shadow-2xl border-4 border-purple-200 flex flex-col gap-5 my-8">
+    <div id="adminModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-start justify-center p-2 sm:p-4 z-50 overflow-y-auto overscroll-contain">
+        <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 max-w-5xl w-full max-h-[92vh] overflow-y-auto overscroll-contain shadow-2xl border-4 border-purple-200 flex flex-col gap-3 sm:gap-4 my-1">
             <div class="flex justify-between items-center border-b pb-3">
                 <h3 class="text-xl sm:text-2xl font-black text-purple-800">⚙️ لوحة إدارة اللعبة والكلمات</h3>
                 <button onclick="closeAdminModal()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold cursor-pointer">&times;</button>
@@ -364,6 +373,7 @@
             loadSubtitleFromStorage();
             loadWordsFromStorage();
             initGame();
+            if (new URLSearchParams(window.location.search).get("manage") === "1") setTimeout(openAdminModal, 150);
         };
 
         function loadSubtitleFromStorage() {
@@ -393,7 +403,7 @@
     }
 
     function loadWordsFromStorage() {
-        const saved = localStorage.getItem('game_words_data');
+        const saved = localStorage.getItem('test_words_data');
         if (saved) {
             try {
                 wordsData = JSON.parse(saved);
@@ -406,7 +416,7 @@
     }
 
     function saveWordsToStorage() {
-        localStorage.setItem('game_words_data', JSON.stringify(wordsData));
+        localStorage.setItem('test_words_data', JSON.stringify(wordsData));
     }
 
     function confirmRestoreWords() {
@@ -522,8 +532,11 @@
             placedEl.dataset.wordId = wordObj.id;
             zoneContainer.appendChild(placedEl);
 
-            // لا يتم إظهار الدرجة أو أي تقييم مرحلي؛ تُحسب النتيجة عند الطلب فقط.
+            // لا يظهر أي تقييم أثناء النقل. بعد نقل آخر كلمة تُعرض النتيجة النهائية مباشرة.
             renderWordPool();
+            if (activeWords.length > 0 && activeWords.every(word => word.placed)) {
+                setTimeout(showFinalResults, 250);
+            }
         }
 
         function showFinalResults() {
