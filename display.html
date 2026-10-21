@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض تفاعلي ممتع</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        girlPink: {
+                            50: '#fff0f6',
+                            100: '#ffe3ec',
+                            200: '#fcc2d7',
+                            400: '#f783ac',
+                            500: '#e64980',
+                            600: '#d6336c',
+                        },
+                        girlPurple: {
+                            50: '#f8f0fc',
+                            100: '#f3d9fa',
+                            400: '#da77f2',
+                            500: '#cc5de8',
+                            600: '#ae3ec9',
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        /* Slide Transition Animations */
+        .slide {
+            display: none;
+            opacity: 0;
+            transform: scale(0.96) translateY(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Custom soft background texture/gradients */
+        .bg-soft-pattern {
+            background-color: #fff0f5;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(247, 131, 172, 0.18) 0px, transparent 50%),
+                radial-gradient(at 90% 10%, rgba(218, 119, 242, 0.18) 0px, transparent 50%),
+                radial-gradient(at 50% 80%, rgba(255, 227, 236, 0.4) 0px, transparent 50%);
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Responsive custom height for mobile viewports */
+        .app-container {
+            min-height: 100vh;
+            min-height: 100dvh;
+        }
+    </style>
+</head>
+<body class="bg-soft-pattern app-container w-screen flex flex-col justify-between text-gray-800 relative overflow-hidden">
+
+    <!-- Top Header -->
+    <header class="w-full px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center z-20 shrink-0">
+        <div class="flex items-center space-x-2 sm:space-x-3 space-x-reverse">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-500 text-white flex items-center justify-center font-bold text-base sm:text-xl shadow-md shadow-pink-200">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+                <h1 class="text-sm sm:text-xl font-extrabold text-pink-600 tracking-wide">فصل المبدعات الصغيرات ✨</h1>
+                <p class="text-[10px] sm:text-xs text-purple-500 font-semibold">رحلة التعلم والتميز</p>
+            </div>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="bg-white/80 backdrop-blur px-3 sm:px-5 py-1.5 sm:py-2 rounded-full border border-pink-200 shadow-sm flex items-center gap-1.5 sm:gap-3">
+            <span class="text-[10px] sm:text-xs font-bold text-gray-500 hidden sm:inline">الشريحة</span>
+            <span id="slide-number" class="text-sm sm:text-base font-black text-pink-600">1</span>
+            <span class="text-[10px] sm:text-xs font-bold text-gray-400">/</span>
+            <span id="total-slides" class="text-xs sm:text-xs font-bold text-gray-500">19</span>
+        </div>
+    </header>
+
+    <!-- Presentation Slides Container -->
+    <main class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-2 sm:py-4 flex items-center justify-center z-10 relative overflow-y-auto">
+
+        <!-- Slide 1 -->
+        <div class="slide active w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative floating-element overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-book-open-reader"></i>
+            </div>
+            <span class="px-3 py-1 bg-pink-100 text-pink-600 font-bold rounded-full text-xs sm:text-sm mb-3">البداية</span>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-pink-600 mb-3 sm:mb-4 leading-tight">القوانين الصفية</h2>
+            <p class="text-gray-500 text-sm sm:text-lg font-semibold max-w-md">قواعدنا الذكية لفصل ممتع ومنظم</p>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-purple-100 text-purple-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <span class="px-3 py-1 bg-purple-100 text-purple-600 font-bold rounded-full text-xs sm:text-sm mb-3">الأنشطة</span>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-purple-600 mb-3 sm:mb-4">المنصة (الواجب)</h2>
+            <p class="text-gray-500 text-sm sm:text-lg font-semibold">متابعة الأداء وإنجاز المهام اليومية</p>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-rose-100 text-rose-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-pen-nib"></i>
+            </div>
+            <span class="px-3 py-1 bg-rose-100 text-rose-600 font-bold rounded-full text-xs sm:text-sm mb-3">الكتابة والإملاء</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-gray-800 mb-4 sm:mb-6">السطر الإملائي:</h2>
+            <div class="p-4 sm:p-6 bg-rose-50 border-2 border-dashed border-rose-200 rounded-xl sm:rounded-2xl w-full max-w-lg">
+                <p class="text-xl sm:text-3xl md:text-4xl font-extrabold text-rose-600 tracking-wide">" أبلغ فؤاد عن الحريق. "</p>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-4 shadow-inner shrink-0">
+                <i class="fa-solid fa-film"></i>
+            </div>
+            <span class="px-3 py-1 bg-amber-100 text-amber-700 font-bold rounded-full text-xs sm:text-sm mb-2 sm:mb-3">مراجعة سريعة</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-amber-600 mb-4 sm:mb-6">مراجعة الوحدة: شريط الذكريات</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 w-full max-w-2xl text-right text-sm sm:text-base">
+                <div class="p-3 sm:p-4 bg-amber-50/80 rounded-xl border border-amber-200 text-amber-900 font-bold">1. ما عنوان الوحدة ورقمها؟</div>
+                <div class="p-3 sm:p-4 bg-amber-50/80 rounded-xl border border-amber-200 text-amber-900 font-bold">2. ما لونها؟</div>
+                <div class="p-3 sm:p-4 bg-amber-50/80 rounded-xl border border-amber-200 text-amber-900 font-bold">3. ما عنوان الدرس السابق؟</div>
+                <div class="p-3 sm:p-4 bg-amber-50/80 rounded-xl border border-amber-200 text-amber-900 font-bold">4. اقرأي النص قراءة مضبوطة بالشكل.</div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-indigo-100 text-indigo-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-dharmachakra"></i>
+            </div>
+            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 font-bold rounded-full text-xs sm:text-sm mb-3">مسابقة وتحدي</span>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-indigo-600 mb-3 sm:mb-4">لعبة العجلة (مراجعة)</h2>
+            <p class="text-lg sm:text-2xl font-bold text-pink-500">أين قارئاتي المبدعات؟ ✨</p>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-comments"></i>
+            </div>
+            <span class="px-3 py-1 bg-teal-100 text-teal-700 font-bold rounded-full text-xs sm:text-sm mb-3">تفكير وإبداع</span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-teal-700 mb-4 sm:mb-6">سؤال ناقش</h2>
+            <div class="p-4 sm:p-6 bg-teal-50 rounded-xl sm:rounded-2xl border border-teal-200 max-w-xl w-full">
+                <p class="text-lg sm:text-2xl font-extrabold text-teal-900">اقترحي عنوانًا آخر للدرس (الجار الصغير)</p>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-fuchsia-100 text-fuchsia-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-masks-theater"></i>
+            </div>
+            <span class="px-3 py-1 bg-fuchsia-100 text-fuchsia-700 font-bold rounded-full text-xs sm:text-sm mb-3">المقدمة الشيقة</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-fuchsia-600 mb-3 sm:mb-4">التمهيد (مشهد تمثيلي)</h2>
+            <p class="text-base sm:text-xl font-bold text-gray-700">أقسام الاسم من حيث العدد واستخراج الموضوع</p>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <span class="px-3 py-1 bg-pink-100 text-pink-600 font-bold rounded-full text-xs sm:text-sm mb-3">خطوات النجاح</span>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-pink-600 mb-3 sm:mb-4">أهدافنا الصغيرة اليوم 🎯</h2>
+            <p class="text-gray-500 text-sm sm:text-lg font-semibold">ما سنحسنه ونكتسبه في حصتنا</p>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <span class="px-3 py-1 bg-sky-100 text-sky-700 font-bold rounded-full text-xs sm:text-sm mb-3">المعلمة الصغيرة</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-sky-600 mb-3 sm:mb-4">صورة المنازل - شرح رتيل 🏡</h2>
+            <p class="text-gray-600 text-sm sm:text-lg font-bold">تشرح المعلمة الصغيرة رتيل بعد الانتهاء من الكتاب</p>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 font-bold rounded-full text-xs sm:text-sm mb-3">التطبيق</span>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-emerald-600 mb-3 sm:mb-4">شريحة حل الكتاب</h2>
+            <p class="text-gray-500 text-sm sm:text-lg font-semibold">نطبق ما تعلمناه في مجيب الكتاب المدرسي</p>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-4 shadow-inner shrink-0">
+                <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <span class="px-3 py-1 bg-violet-100 text-violet-700 font-bold rounded-full text-xs sm:text-sm mb-2 sm:mb-3">تفاعل رقمي</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-violet-600 mb-3 sm:mb-4">رابط اللعبة (التصنيف) 🎮</h2>
+            <div class="p-4 sm:p-6 bg-violet-50 rounded-xl sm:rounded-2xl border border-violet-200 mt-1 max-w-xl w-full">
+                <p class="text-xs sm:text-sm text-violet-500 font-bold mb-1">السؤال الرقمي:</p>
+                <p class="text-lg sm:text-2xl font-black text-violet-900">"هل هو رجل وليس رجلان؟"</p>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <span class="px-3 py-1 bg-pink-100 text-pink-600 font-bold rounded-full text-xs sm:text-sm mb-3">توضيح وقراءة</span>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-pink-600 mb-3 sm:mb-4">أنا + شرح كلمات الكتاب</h2>
+            <p class="text-gray-500 text-sm sm:text-lg font-semibold">استعراض الكلمات المعجمية وتحليل معانيها</p>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-flag"></i>
+            </div>
+            <span class="px-3 py-1 bg-green-100 text-green-700 font-bold rounded-full text-xs sm:text-sm mb-3">وطني المعطاء</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-green-700 mb-4 sm:mb-6">الربط بالوطن 🇸🇦</h2>
+            <div class="p-4 sm:p-6 bg-green-50 rounded-xl sm:rounded-2xl border border-green-200 flex flex-col items-center">
+                <i class="fa-solid fa-qrcode text-4xl sm:text-6xl text-green-600 mb-2 sm:mb-3"></i>
+                <p class="text-base sm:text-xl font-bold text-green-900">باركود جهود الدفاع المدني</p>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-4 shadow-inner shrink-0">
+                <i class="fa-solid fa-book-quran"></i>
+            </div>
+            <span class="px-3 py-1 bg-amber-100 text-amber-700 font-bold rounded-full text-xs sm:text-sm mb-2 sm:mb-3">تكامل المواد</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-amber-700 mb-3 sm:mb-4">الربط بالمواد (القرآن الكريم) 📖</h2>
+            <div class="p-4 sm:p-6 bg-amber-50 rounded-xl sm:rounded-2xl border border-amber-200 max-w-xl w-full">
+                <p class="text-base sm:text-xl font-bold text-amber-900 leading-relaxed">
+                    ورد في القرآن الكريم الكلمتان: <span class="text-pink-600 font-black">"المفرد"</span> و <span class="text-pink-600 font-black">"الامتنان"</span>.
+                </p>
+                <p class="text-xs sm:text-md text-amber-700 font-semibold mt-2">ابحثي عنهما في سورة البلد.</p>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-4 shadow-inner shrink-0">
+                <i class="fa-solid fa-hands-clapping"></i>
+            </div>
+            <span class="px-3 py-1 bg-purple-100 text-purple-700 font-bold rounded-full text-xs sm:text-sm mb-2 sm:mb-3">تفاعل جماعي</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-purple-600 mb-3 sm:mb-4">هلا لبي التلبية 🔔</h2>
+            <div class="p-4 sm:p-6 bg-purple-50 rounded-xl sm:rounded-2xl border border-purple-200 max-w-2xl w-full">
+                <p class="text-base sm:text-xl font-bold text-purple-900 leading-relaxed">
+                    هاتي كلمات من بيئتك الصفية أو المدرسية تدل على <span class="text-pink-600 font-black">جمع</span>، ثم اذكري <span class="text-pink-600 font-black">مفرد</span> كل منها.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-rose-100 text-rose-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-file-pen"></i>
+            </div>
+            <span class="px-3 py-1 bg-rose-100 text-rose-600 font-bold rounded-full text-xs sm:text-sm mb-3">قياس الفهم</span>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-rose-600 mb-3 sm:mb-4">نشاط فردي 📝</h2>
+            <p class="text-gray-600 text-lg sm:text-2xl font-bold">ورقة عمل</p>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-4 shadow-inner shrink-0">
+                <i class="fa-solid fa-child-reaching"></i>
+            </div>
+            <span class="px-3 py-1 bg-orange-100 text-orange-600 font-bold rounded-full text-xs sm:text-sm mb-2 sm:mb-3">نشاط حركي</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-orange-600 mb-3 sm:mb-4">بطاقة الخروج: العب وتحرك 🏃‍♀️</h2>
+            <div class="p-4 sm:p-6 bg-orange-50 rounded-xl sm:rounded-2xl border border-orange-200 max-w-xl w-full">
+                <p class="text-base sm:text-xl font-extrabold text-orange-900 leading-relaxed">
+                    إذا سمعتِ <span class="text-pink-600 font-black">مفرداً</span> اصفقي صباحاً
+                </p>
+                <div class="mt-3 flex flex-wrap justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold text-orange-700">
+                    <span class="px-2.5 py-1 bg-white rounded-lg shadow-sm">مفرد إصبع</span>
+                    <span class="px-2.5 py-1 bg-white rounded-lg shadow-sm">إصبعان</span>
+                    <span class="px-2.5 py-1 bg-white rounded-lg shadow-sm">جمع</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-6 shadow-inner shrink-0">
+                <i class="fa-solid fa-house-laptop"></i>
+            </div>
+            <span class="px-3 py-1 bg-teal-100 text-teal-700 font-bold rounded-full text-xs sm:text-sm mb-3">المتابعة المنزلية</span>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-teal-600 mb-3 sm:mb-4">الواجب الإلكتروني</h2>
+            <div class="p-4 sm:p-6 bg-teal-50 rounded-xl sm:rounded-2xl border border-teal-200">
+                <p class="text-lg sm:text-2xl font-black text-teal-800">في منصة (اشري) 💻</p>
+            </div>
+        </div>
+
+        <!-- Slide 19 -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-4 shadow-inner shrink-0">
+                <i class="fa-solid fa-star"></i>
+            </div>
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 font-bold rounded-full text-xs sm:text-sm mb-2 sm:mb-3">مشروع وختام</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-yellow-600 mb-3 sm:mb-4">مهمة أدائية شفهية ⭐</h2>
+            <div class="p-4 sm:p-6 bg-yellow-50 rounded-xl sm:rounded-2xl border border-yellow-200 max-w-xl w-full">
+                <p class="text-base sm:text-xl font-bold text-yellow-900">
+                    مشروع مصور أو مجسم عن <span class="text-pink-600 font-black">حقوق الجار وجيراني</span>
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Navigation & Floating Values -->
+    <footer class="w-full px-4 sm:px-8 py-3 sm:py-4 flex flex-col sm:flex-row justify-between items-center z-20 bg-white/50 backdrop-blur-md border-t border-pink-100 gap-3 sm:gap-0 shrink-0">
+        
+        <!-- Bottom Right Side Note: Values -->
+        <div class="flex items-center gap-1.5 sm:gap-2 bg-pink-100/90 px-3 sm:px-4 py-1.5 rounded-full border border-pink-200 text-pink-700 font-extrabold text-xs sm:text-sm shadow-sm">
+            <i class="fa-solid fa-heart text-pink-500 text-xs sm:text-sm"></i>
+            <span>القيم: التعاون / الصدق</span>
+        </div>
+
+        <!-- Bottom Navigation Controls -->
+        <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center">
+            <button id="restart-btn" onclick="restartPresentation()" class="px-3 sm:px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition flex items-center gap-1.5 text-xs sm:text-sm shadow-sm" title="بدء من جديد">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span class="hidden md:inline">البدء من جديد</span>
+            </button>
+            
+            <button id="prev-btn" onclick="prevSlide()" class="px-4 sm:px-5 py-2 sm:py-2.5 bg-pink-100 hover:bg-pink-200 text-pink-700 font-bold rounded-xl transition flex items-center gap-1.5 text-xs sm:text-sm shadow-sm">
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span>السابق</span>
+            </button>
+
+            <button id="next-btn" onclick="nextSlide()" class="px-5 sm:px-6 py-2 sm:py-2.5 bg-pink-500 hover:bg-pink-600 text-white font-black rounded-xl transition flex items-center gap-1.5 text-xs sm:text-sm shadow-md shadow-pink-200">
+                <span>التالي</span>
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberDisplay = document.getElementById('slide-number');
+        const totalSlidesDisplay = document.getElementById('total-slides');
+
+        totalSlidesDisplay.textContent = slides.length;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            slideNumberDisplay.textContent = currentSlide + 1;
+
+            document.getElementById('prev-btn').style.opacity = currentSlide === 0 ? "0.5" : "1";
+            document.getElementById('prev-btn').style.pointerEvents = currentSlide === 0 ? "none" : "auto";
+            
+            if (currentSlide === slides.length - 1) {
+                document.getElementById('next-btn').classList.remove('bg-pink-500');
+                document.getElementById('next-btn').classList.add('bg-purple-600');
+            } else {
+                document.getElementById('next-btn').classList.add('bg-pink-500');
+                document.getElementById('next-btn').classList.remove('bg-purple-600');
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function restartPresentation() {
+            currentSlide = 0;
+            updateSlide();
+        }
+
+        // Keyboard Controls
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === 'ArrowLeft') {
+                nextSlide();
+            } else if (event.key === 'ArrowRight') {
+                prevSlide();
+            }
+        });
+
+        // Touch Swipe Gesture Handling for Mobile Devices
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleGesture();
+        });
+
+        function handleGesture() {
+            const swipeThreshold = 50;
+            if (touchstartX - touchendX > swipeThreshold) {
+                // Swiped Left (Next in RTL)
+                nextSlide();
+            } 
+            if (touchendX - touchstartX > swipeThreshold) {
+                // Swiped Right (Previous in RTL)
+                prevSlide();
+            }
+        }
+
+        updateSlide();
+    </script>
+</body>
+</html>
