@@ -1,0 +1,43 @@
+name: Manual deploy to Cloudflare Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_deploy:
+        description: "اكتب deploy لتأكيد نشر النسخة الحالية"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-pages-play-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy static pages
+    if: ${{ inputs.confirm_deploy == 'deploy' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Prepare website files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public
+          test -f index.html
+          cp index.html public/index.html
+          if [ -f training.html ]; then cp training.html public/training.html; fi
+          echo "Files prepared for deployment:"
+          find public -maxdepth 1 -type f -printf '%f\n'
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name=play --branch=main
