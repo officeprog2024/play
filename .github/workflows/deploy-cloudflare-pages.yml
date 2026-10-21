@@ -29,8 +29,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p public
-          test -f index.html
-          cp index.html public/index.html
+          test -f test.html
+          cp test.html public/index.html
           if [ -f training.html ]; then cp training.html public/training.html; fi
           echo "Files prepared for deployment:"
           find public -maxdepth 1 -type f -printf '%f\n'
