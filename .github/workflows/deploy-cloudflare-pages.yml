@@ -39,19 +39,30 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p public
+
+          # Copy website files and folders recursively, including new pages and assets.
+          # Exclude repository metadata, workflow definitions, build output, dependencies,
+          # and environment files that may contain secrets.
+          rsync -a ./ public/ \
+            --exclude='/.git/' \
+            --exclude='/.github/' \
+            --exclude='/public/' \
+            --exclude='/node_modules/' \
+            --exclude='/.wrangler/' \
+            --exclude='/.env' \
+            --exclude='/.env.*' \
+            --exclude='**/.env' \
+            --exclude='**/.env.*'
+
           for file in index.html play.html test.html; do
-            if [[ ! -s "$file" ]]; then
-              echo "::error::الملف المطلوب مفقود أو فارغ: $file"
+            if [[ ! -s "public/$file" ]]; then
+              echo "::error::الملف الأساسي مفقود أو فارغ بعد تجهيز النشر: $file"
               exit 1
             fi
-            cp "$file" public/
           done
-          if [[ -s training.html ]]; then cp training.html public/; fi
-          echo "Files prepared for deployment:"
-          find public -maxdepth 1 -type f -printf '%f\n' | sort
-          for file in index.html play.html test.html; do
-            test -s "public/$file"
-          done
+
+          echo "Website files prepared for deployment:"
+          find public -type f -printf '%P\\n' | sort
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
