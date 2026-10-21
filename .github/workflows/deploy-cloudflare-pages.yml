@@ -18,22 +18,40 @@ concurrency:
 jobs:
   deploy:
     name: Deploy static pages
-    if: ${{ inputs.confirm_deploy == 'deploy' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Prepare website files
+      - name: Validate manual confirmation
+        shell: bash
+        env:
+          CONFIRM_DEPLOY: ${{ inputs.confirm_deploy }}
+        run: |
+          set -euo pipefail
+          if [[ "$CONFIRM_DEPLOY" != "deploy" ]]; then
+            echo "::error::لم يتم النشر. اكتب deploy حرفيًا في حقل التأكيد."
+            exit 1
+          fi
+
+      - name: Prepare and validate website files
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p public
-          test -f index.html
-          cp index.html public/index.html
-          if [ -f training.html ]; then cp training.html public/training.html; fi
+          for file in index.html play.html test.html; do
+            if [[ ! -s "$file" ]]; then
+              echo "::error::الملف المطلوب مفقود أو فارغ: $file"
+              exit 1
+            fi
+            cp "$file" public/
+          done
+          if [[ -s training.html ]]; then cp training.html public/; fi
           echo "Files prepared for deployment:"
-          find public -maxdepth 1 -type f -printf '%f\n'
+          find public -maxdepth 1 -type f -printf '%f\n' | sort
+          for file in index.html play.html test.html; do
+            test -s "public/$file"
+          done
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
