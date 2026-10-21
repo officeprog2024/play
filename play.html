@@ -35,58 +35,64 @@
 </head>
 <body class="bg-gradient-to-br from-pink-100 via-purple-100 to-sky-100 min-h-screen flex flex-col items-center justify-between p-3 sm:p-6 transition-colors duration-500" id="mainContainer">
 
-    <header class="w-full max-w-4xl flex flex-col sm:flex-row justify-between items-center bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-3 sm:p-4 mb-4 sm:mb-6 border-2 border-pink-200 gap-3">
-        <div class="flex items-center gap-3">
-            <span class="text-3xl sm:text-4xl">⭐</span>
-            <h1 class="text-xl sm:text-2xl md:text-3xl font-black text-purple-700 text-center sm:text-right">لعبة المفرد والجمع</h1>
+    <header class="w-full max-w-6xl flex flex-col justify-center items-center bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 sm:p-5 mb-4 sm:mb-6 border-2 border-pink-200 gap-3 text-center">
+        <div class="w-full flex flex-col sm:flex-row justify-between items-center gap-3 border-b border-pink-100 pb-3">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl sm:text-4xl">⭐</span>
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-purple-700">لعبة المفرد والجمع</h1>
+            </div>
+            <div class="flex flex-wrap justify-center gap-2 w-full sm:w-auto">
+                <button onclick="resetGame()" class="flex-1 sm:flex-none bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-4 py-2 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer text-xs sm:text-base">
+                    🔄 بدء من جديد
+                </button>
+                <button onclick="openAdminModal()" class="flex-1 sm:flex-none bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer text-xs sm:text-base">
+                    ⚙️ إدارة الكلمات
+                </button>
+            </div>
         </div>
-        <div class="flex flex-wrap justify-center gap-2 w-full sm:w-auto">
-            <button onclick="resetGame()" class="flex-1 sm:flex-none bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-3 sm:px-4 py-2 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer text-xs sm:text-base">
-                🔄 بدء من جديد
-            </button>
-            <button onclick="openAdminModal()" class="flex-1 sm:flex-none bg-purple-600 hover:bg-purple-700 text-white font-bold px-3 sm:px-4 py-2 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer text-xs sm:text-base">
-                ⚙️ إدارة الكلمات
-            </button>
-        </div>
+        <!-- Subtitle Activity Info -->
+        <p id="activitySubtitle" class="text-purple-900 font-extrabold text-xs sm:text-sm bg-purple-50/80 px-4 py-1.5 rounded-xl border border-purple-200 leading-relaxed max-w-5xl">
+            نشاط ترفيهي إثرائي لمكون أُحَوِّلُ ضمن الدرس الثاني الجار الصغير من الوحدة الثانية أصدقائي وجيراني
+        </p>
     </header>
 
-    <main class="w-full max-w-4xl flex-1 flex flex-col items-center justify-center gap-4 sm:gap-6">
+    <main class="w-full max-w-6xl flex-1 flex flex-col items-center justify-center gap-4 sm:gap-6">
         
         <!-- Score & Instructions -->
-        <div class="w-full bg-white/90 px-4 sm:px-6 py-3 rounded-2xl shadow border border-purple-100 text-center">
-            <p class="text-gray-700 font-bold text-sm sm:text-lg">اسحب الكلمة أو اضغط عليها ثم اضغط في الصندوق المناسب (مفرد أو جمع)!</p>
-            <div class="text-purple-600 font-extrabold mt-1 text-sm sm:text-base">النقاط: <span id="score">0</span> / <span id="totalWords">0</span></div>
+        <div class="w-full bg-white/90 px-4 sm:px-6 py-3.5 rounded-2xl shadow border border-purple-100 text-center">
+            <p class="text-gray-800 font-bold text-base sm:text-xl">اسحبي الكلمة أو اضغطي عليها ثم اضغطي في الصندوق المناسب (مفرد أو جمع)!</p>
+            <div class="text-purple-600 font-extrabold mt-1 text-base sm:text-lg">النقاط: <span id="score">0</span> / <span id="totalWords">0</span></div>
         </div>
 
-        <!-- Word Pool Container -->
-        <div class="w-full bg-white/85 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-xl border-4 border-dashed border-purple-300 min-h-[120px] sm:min-h-[140px] flex flex-wrap gap-2 sm:gap-3 items-center justify-center" id="wordPool">
+        <!-- Word Pool Container (Expanded to full available width) -->
+        <div class="w-full bg-white/85 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-xl border-4 border-dashed border-purple-300 min-h-[130px] sm:min-h-[160px] flex flex-wrap gap-2.5 sm:gap-3.5 items-center justify-center" id="wordPool">
             <!-- Words will be dynamically injected here -->
         </div>
 
-        <!-- Drop Zones Container (Singular & Plural) -->
+        <!-- Drop Zones Container (Expanded width to match screen) -->
         <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             
             <!-- Singular Drop Zone -->
-            <div class="bg-sky-50 rounded-3xl p-4 sm:p-6 shadow-lg border-4 border-sky-300 flex flex-col items-center min-h-[200px] sm:min-h-[260px] transition-all"
+            <div class="bg-sky-50 rounded-3xl p-4 sm:p-6 shadow-lg border-4 border-sky-300 flex flex-col items-center min-h-[220px] sm:min-h-[280px] transition-all"
                  ondragover="allowDrop(event)" ondragleave="removeHighlight(event)" ondrop="dropWord(event, 'singular')" onclick="selectZone('singular')">
                 <div class="flex items-center gap-2 mb-3 sm:mb-4">
                     <span class="text-2xl sm:text-3xl">📘</span>
-                    <h2 class="text-xl sm:text-2xl font-black text-sky-700">مفرد</h2>
+                    <h2 class="text-2xl sm:text-3xl font-black text-sky-700">مفرد</h2>
                 </div>
-                <div id="singularZone" class="w-full flex-1 flex flex-wrap gap-2 items-center justify-center border-2 border-dashed border-sky-200 rounded-2xl p-3 bg-white/60">
-                    <span class="text-sky-400 text-xs sm:text-sm font-semibold select-none">ضَع الكلمات المفردة هنا</span>
+                <div id="singularZone" class="w-full flex-1 flex flex-wrap gap-2.5 items-center justify-center border-2 border-dashed border-sky-200 rounded-2xl p-3 bg-white/60">
+                    <span class="text-sky-400 text-sm sm:text-base font-semibold select-none">ضَعِي الكلمات المفردة هنا</span>
                 </div>
             </div>
 
             <!-- Plural Drop Zone -->
-            <div class="bg-pink-50 rounded-3xl p-4 sm:p-6 shadow-lg border-4 border-pink-300 flex flex-col items-center min-h-[200px] sm:min-h-[260px] transition-all"
+            <div class="bg-pink-50 rounded-3xl p-4 sm:p-6 shadow-lg border-4 border-pink-300 flex flex-col items-center min-h-[220px] sm:min-h-[280px] transition-all"
                  ondragover="allowDrop(event)" ondragleave="removeHighlight(event)" ondrop="dropWord(event, 'plural')" onclick="selectZone('plural')">
                 <div class="flex items-center gap-2 mb-3 sm:mb-4">
                     <span class="text-2xl sm:text-3xl">📚</span>
-                    <h2 class="text-xl sm:text-2xl font-black text-pink-700">جمع</h2>
+                    <h2 class="text-2xl sm:text-3xl font-black text-pink-700">جمع</h2>
                 </div>
-                <div id="pluralZone" class="w-full flex-1 flex flex-wrap gap-2 items-center justify-center border-2 border-dashed border-pink-200 rounded-2xl p-3 bg-white/60">
-                    <span class="text-pink-400 text-xs sm:text-sm font-semibold select-none">ضَع كلمات الجمع هنا</span>
+                <div id="pluralZone" class="w-full flex-1 flex flex-wrap gap-2.5 items-center justify-center border-2 border-dashed border-pink-200 rounded-2xl p-3 bg-white/60">
+                    <span class="text-pink-400 text-sm sm:text-base font-semibold select-none">ضَعِي كلمات الجمع هنا</span>
                 </div>
             </div>
 
@@ -94,14 +100,17 @@
 
     </main>
 
-    <footer class="w-full text-center mt-6 text-gray-500 text-xs sm:text-sm font-semibold">
-        صُمم خصيصاً لطالبات الصف الثاني الابتدائي الجميلات ✨
+    <footer class="w-full text-center mt-6 text-gray-700 text-xs sm:text-sm font-bold flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-4 bg-white/60 py-2 px-4 rounded-xl border border-purple-100">
+        <span>صُمم خصيصاً لطالبات الصف الثاني الابتدائي الجميلات ✨</span>
+        <span class="hidden sm:inline">|</span>
+        <span class="text-purple-800 font-extrabold">معلمة المادة: فاطمة الحربي</span>
     </footer>
 
+    <!-- Password Modal -->
     <div id="passwordModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
         <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border-4 border-purple-200 flex flex-col gap-4">
             <h3 class="text-xl font-bold text-purple-800 text-center">🔑 إدخال رمز الدخول للإدارة</h3>
-            <p class="text-gray-600 text-sm text-center">الرمز الافتراضي هو: <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded font-bold">ftm</span></p>
+            <p class="text-gray-600 text-sm text-center">الرمز الافتراضي هو: <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded font-bold">1234</span></p>
             <input type="password" id="passwordInput" placeholder="أدخل رمز الدخول..." class="border-2 border-purple-300 rounded-2xl px-4 py-3 outline-none focus:border-purple-600 text-center text-lg font-bold">
             <div class="flex gap-3 mt-2">
                 <button onclick="closePasswordModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-xl transition cursor-pointer">إلغاء</button>
@@ -110,26 +119,42 @@
         </div>
     </div>
 
+    <!-- Admin Modal -->
     <div id="adminModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50 overflow-y-auto">
-        <div class="bg-white rounded-3xl p-4 sm:p-6 max-w-2xl w-full shadow-2xl border-4 border-purple-200 flex flex-col gap-5 my-8">
+        <div class="bg-white rounded-3xl p-4 sm:p-6 max-w-3xl w-full shadow-2xl border-4 border-purple-200 flex flex-col gap-5 my-8">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="text-xl sm:text-2xl font-black text-purple-800">⚙️ إدارة الكلمات (إضافة وحذف)</h3>
+                <h3 class="text-xl sm:text-2xl font-black text-purple-800">⚙️ لوحة إدارة اللعبة والكلمات</h3>
                 <button onclick="closeAdminModal()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold cursor-pointer">&times;</button>
+            </div>
+
+            <!-- Edit Subtitle Activity Phrase -->
+            <div class="bg-purple-50 p-4 rounded-2xl border border-purple-200 flex flex-col gap-3">
+                <h4 class="font-bold text-purple-800 text-sm sm:text-base">تعديل عبارة عنوان النشاط الإثرائي:</h4>
+                <textarea id="subtitleInput" rows="2" class="bg-white border-2 border-purple-200 rounded-xl p-3 outline-none focus:border-purple-500 text-sm sm:text-base font-bold text-purple-900"></textarea>
+                <div class="flex flex-wrap gap-2 justify-end">
+                    <button onclick="restoreDefaultSubtitle()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm transition cursor-pointer">استعادة النص الافتراضي</button>
+                    <button onclick="saveSubtitle()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-1.5 rounded-xl text-xs sm:text-sm transition cursor-pointer">حفظ النص</button>
+                </div>
             </div>
 
             <!-- Add Word Form -->
             <div class="bg-purple-50 p-4 rounded-2xl border border-purple-200 flex flex-col gap-3">
-                <h4 class="font-bold text-purple-700 text-sm sm:text-base">إضافة زوج كلمات جديد (مفرد وجمعه):</h4>
+                <h4 class="font-bold text-purple-800 text-sm sm:text-base">إضافة زوج كلمات جديد (مفرد وجمعه):</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <input type="text" id="newSingular" placeholder="كلمة المفرد (مثال: كتاب)" class="bg-white border-2 border-purple-200 rounded-xl px-3 py-2 outline-none focus:border-purple-500 text-sm sm:text-base">
-                    <input type="text" id="newPlural" placeholder="كلمة الجمع (مثال: كتب)" class="bg-white border-2 border-purple-200 rounded-xl px-3 py-2 outline-none focus:border-purple-500 text-sm sm:text-base">
+                    <input type="text" id="newSingular" placeholder="كلمة المفرد (مثال: شجرة)" class="bg-white border-2 border-purple-200 rounded-xl px-3 py-2 outline-none focus:border-purple-500 text-sm sm:text-base">
+                    <input type="text" id="newPlural" placeholder="كلمة الجمع (مثال: أشجار)" class="bg-white border-2 border-purple-200 rounded-xl px-3 py-2 outline-none focus:border-purple-500 text-sm sm:text-base">
                 </div>
                 <button onclick="addNewWordPair()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow cursor-pointer text-sm sm:text-base">حفظ الإضافة</button>
             </div>
 
             <!-- Words List Table -->
             <div class="flex flex-col gap-2">
-                <h4 class="font-bold text-gray-700 text-sm sm:text-base">الكلمات الحالية في اللعبة:</h4>
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-gray-700 text-sm sm:text-base">الكلمات الحالية في اللعبة:</h4>
+                    <button onclick="restoreDefaultWords()" class="bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold px-3 py-1 rounded-xl text-xs sm:text-sm transition cursor-pointer">
+                        🔄 استعادة الكلمات الافتراضية
+                    </button>
+                </div>
                 <div class="max-h-52 overflow-y-auto border border-gray-200 rounded-2xl p-2 bg-gray-50 flex flex-col gap-2" id="adminWordsList">
                     <!-- Populated dynamically -->
                 </div>
@@ -142,7 +167,7 @@
     </div>
 
     <script>
-        // Web Audio API sound generator for cheer and error feedback
+        // Web Audio API sound generator for cheer/applause sound and error feedback
         let audioCtx = null;
 
         function initAudio() {
@@ -151,40 +176,69 @@
             }
         }
 
-        // Play success cheer sound (harmonious ascending cheerful chimes)
+        // Play applause and cheer sound for correct answer
         function playSuccessSound() {
             try {
                 initAudio();
                 if (!audioCtx) return;
                 const now = audioCtx.currentTime;
-                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                
+                // Cheerful melodic chord
+                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
                 notes.forEach((freq, idx) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                    osc.frequency.setValueAtTime(freq, now + idx * 0.06);
                     
-                    gain.gain.setValueAtTime(0.2, now + idx * 0.08);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.3);
+                    gain.gain.setValueAtTime(0.2, now + idx * 0.06);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.06 + 0.4);
                     
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
                     
-                    osc.start(now + idx * 0.08);
-                    osc.stop(now + idx * 0.08 + 0.3);
+                    osc.start(now + idx * 0.06);
+                    osc.stop(now + idx * 0.06 + 0.4);
                 });
+
+                // Simulated clapping noise bursts
+                for (let i = 0; i < 15; i++) {
+                    const clapTime = now + 0.1 + Math.random() * 0.5;
+                    const bufferSize = audioCtx.sampleRate * 0.03;
+                    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let j = 0; j < bufferSize; j++) {
+                        data[j] = Math.random() * 2 - 1;
+                    }
+                    const noise = audioCtx.createBufferSource();
+                    noise.buffer = buffer;
+
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.value = 1000 + Math.random() * 800;
+
+                    const gain = audioCtx.createGain();
+                    gain.gain.setValueAtTime(0.08, clapTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, clapTime + 0.03);
+
+                    noise.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    noise.start(clapTime);
+                }
             } catch(e) {
                 console.log('Audio error:', e);
             }
         }
 
-        // Play error warning sound (gentle double low tone)
+        // Play error warning sound
         function playErrorSound() {
             try {
                 initAudio();
                 if (!audioCtx) return;
                 const now = audioCtx.currentTime;
-                const notes = [220, 185]; // A3, F#3
+                const notes = [220, 185]; // Low double tone
                 notes.forEach((freq, idx) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
@@ -205,14 +259,19 @@
             }
         }
 
-        // Default word pairs database
-        let defaultWords = [
+        // Default subtitle phrase
+        const defaultSubtitleText = "نشاط ترفيهي إثرائي لمكون أُحَوِّلُ ضمن الدرس الثاني الجار الصغير من الوحدة الثانية أصدقائي وجيراني";
+
+        // Updated default word pairs database
+        const defaultWords = [
             { id: 1, singular: "قلم", plural: "أقلام" },
             { id: 2, singular: "كتاب", plural: "كتب" },
-            { id: 3, singular: "وردة", plural: "ورود" },
-            { id: 4, singular: "ولد", plural: "أولاد" },
-            { id: 5, singular: "بنت", plural: "بنات" },
-            { id: 6, singular: "تفاحة", plural: "تفاح" }
+            { id: 3, singular: "شجرة", plural: "أشجار" },
+            { id: 4, singular: "مدينة", plural: "مدن" },
+            { id: 5, singular: "مدرسة", plural: "مدارس" },
+            { id: 6, singular: "زهرة", plural: "أزهار" },
+            { id: 7, singular: "وردة", plural: "ورود" },
+            { id: 8, singular: "ولد", plural: "أولاد" }
         ];
 
         let wordsData = [];
@@ -222,9 +281,35 @@
 
         // Initialize game on load
         window.onload = function() {
+            loadSubtitleFromStorage();
             loadWordsFromStorage();
             initGame();
         };
+
+        function loadSubtitleFromStorage() {
+            const savedSubtitle = localStorage.getItem('game_subtitle_text');
+            const subEl = document.getElementById('activitySubtitle');
+            if (savedSubtitle) {
+                subEl.innerText = savedSubtitle;
+            } else {
+                subEl.innerText = defaultSubtitleText;
+            }
+        }
+
+        function saveSubtitle() {
+            const val = document.getElementById('subtitleInput').value.trim();
+            if (val) {
+                localStorage.setItem('game_subtitle_text', val);
+                document.getElementById('activitySubtitle').innerText = val;
+                alert('تم حفظ النص الإثرائي بنجاح!');
+            }
+        }
+
+        function restoreDefaultSubtitle() {
+            localStorage.setItem('game_subtitle_text', defaultSubtitleText);
+            document.getElementById('subtitleInput').value = defaultSubtitleText;
+            document.getElementById('activitySubtitle').innerText = defaultSubtitleText;
+        }
 
         function loadWordsFromStorage() {
             const saved = localStorage.getItem('game_words_data');
@@ -243,6 +328,14 @@
             localStorage.setItem('game_words_data', JSON.stringify(wordsData));
         }
 
+        function restoreDefaultWords() {
+            if (confirm('هل أنت متأكد من استعادة الكلمات الافتراضية؟ سيتم استبدال أي كلمات مضافة.')) {
+                wordsData = [...defaultWords];
+                saveWordsToStorage();
+                renderAdminWordsList();
+            }
+        }
+
         function initGame() {
             score = 0;
             updateScoreDisplay();
@@ -256,8 +349,8 @@
             document.getElementById('totalWords').innerText = activeWords.length;
             
             // Clear zones
-            document.getElementById('singularZone').innerHTML = '<span class="text-sky-400 text-xs sm:text-sm font-semibold select-none">ضَع الكلمات المفردة هنا</span>';
-            document.getElementById('pluralZone').innerHTML = '<span class="text-pink-400 text-xs sm:text-sm font-semibold select-none">ضَع كلمات الجمع هنا</span>';
+            document.getElementById('singularZone').innerHTML = '<span class="text-sky-400 text-sm sm:text-base font-semibold select-none">ضَعِي الكلمات المفردة هنا</span>';
+            document.getElementById('pluralZone').innerHTML = '<span class="text-pink-400 text-sm sm:text-base font-semibold select-none">ضَعِي كلمات الجمع هنا</span>';
             
             renderWordPool();
         }
@@ -268,14 +361,14 @@
             
             const unplacedWords = activeWords.filter(w => !w.placed);
             if (unplacedWords.length === 0) {
-                pool.innerHTML = '<div class="text-purple-600 font-bold text-base sm:text-lg text-center animate-bounce">🎉 رائع جداً! لقد أكملتِ جميع الكلمات بنجاح يا بطلة! ⭐</div>';
+                pool.innerHTML = '<div class="text-purple-700 font-extrabold text-lg sm:text-xl text-center animate-bounce">🎉 رائع جداً! لقد أكملتِ جميع الكلمات بنجاح يا بطلة! ⭐</div>';
                 return;
             }
 
             unplacedWords.forEach(word => {
                 const btn = document.createElement('div');
                 btn.id = word.id;
-                btn.className = `px-4 sm:px-5 py-2.5 sm:py-3 bg-white border-2 border-purple-300 text-purple-800 font-extrabold text-base sm:text-lg rounded-2xl shadow-md cursor-grab active:cursor-grabbing hover:bg-purple-50 transition-all select-none ${selectedWordId === word.id ? 'ring-4 ring-amber-400 bg-amber-50 scale-105' : ''}`;
+                btn.className = `px-4 sm:px-6 py-2.5 sm:py-3 bg-white border-2 border-purple-300 text-purple-900 font-black text-lg sm:text-xl rounded-2xl shadow-md cursor-grab active:cursor-grabbing hover:bg-purple-50 transition-all select-none ${selectedWordId === word.id ? 'ring-4 ring-amber-400 bg-amber-50 scale-105' : ''}`;
                 btn.innerText = word.text;
                 btn.draggable = true;
                 
@@ -339,7 +432,7 @@
             const mainContainer = document.getElementById('mainContainer');
 
             if (wordObj.type === targetType) {
-                // Correct Answer! Play success cheer sound
+                // Correct Answer! Play success applause sound
                 playSuccessSound();
                 wordObj.placed = true;
                 score++;
@@ -359,7 +452,7 @@
                 if (placeholder) placeholder.remove();
 
                 const placedEl = document.createElement('div');
-                placedEl.className = `px-3 sm:px-4 py-1.5 sm:py-2 ${targetType === 'singular' ? 'bg-sky-100 border-sky-400 text-sky-900' : 'bg-pink-100 border-pink-400 text-pink-900'} border-2 font-bold rounded-xl shadow-sm text-sm sm:text-base animate-pulse`;
+                placedEl.className = `px-3.5 sm:px-5 py-2 ${targetType === 'singular' ? 'bg-sky-100 border-sky-400 text-sky-900' : 'bg-pink-100 border-pink-400 text-pink-900'} border-2 font-black rounded-xl shadow-sm text-base sm:text-lg animate-pulse`;
                 placedEl.innerText = wordObj.text;
                 zoneContainer.appendChild(placedEl);
 
@@ -403,15 +496,16 @@
 
         function verifyPassword() {
             const pass = document.getElementById('passwordInput').value;
-            if (pass === 'ftm') {
+            if (pass === '1234') {
                 closePasswordModal();
                 showAdminDashboard();
             } else {
-                alert('رمز الدخول غير صحيح! الرمز الافتراضي هو ftm');
+                alert('رمز الدخول غير صحيح! الرمز الافتراضي هو 1234');
             }
         }
 
         function showAdminDashboard() {
+            document.getElementById('subtitleInput').value = document.getElementById('activitySubtitle').innerText;
             renderAdminWordsList();
             document.getElementById('adminModal').classList.remove('hidden');
             document.getElementById('adminModal').classList.add('flex');
@@ -432,7 +526,7 @@
                 return;
             }
 
-            wordsData.forEach((item, index) => {
+            wordsData.forEach((item) => {
                 const row = document.createElement('div');
                 row.className = 'flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-3 rounded-xl shadow-sm border border-gray-100 gap-2';
                 row.innerHTML = `
