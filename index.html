@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>الرئيسية - لُعْبَةُ المُلْكِ وَالْجَمْعِ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            touch-action: manipulation;
+        }
+        /* Custom floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-purple-100 to-sky-100 min-h-screen flex flex-col items-center justify-between p-4 sm:p-6">
+
+    <!-- Header Section -->
+    <header class="w-full max-w-4xl flex flex-col justify-center items-center bg-white/90 backdrop-blur-md shadow-lg rounded-3xl p-5 sm:p-6 mb-4 border-2 border-pink-200 text-center">
+        <div class="flex items-center gap-3 mb-2">
+            <span class="text-4xl sm:text-5xl animate-bounce">⭐</span>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-purple-700">لُعْبَةُ وَاخْتِبَارُ الْمُفْرَدِ وَالْجَمْعِ</h1>
+        </div>
+        <p class="text-purple-900 font-extrabold text-sm sm:text-base bg-purple-50/90 px-4 py-2 rounded-2xl border border-purple-200 mt-2">
+            مرحباً بكم في المادة التعليمية التفاعلية لِلغَةِ الْعَرَبِيَّةِ
+        </p>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="w-full max-w-4xl flex-1 flex flex-col items-center justify-center gap-6 sm:gap-8 my-4">
+        
+        <!-- Academic Info Card -->
+        <div class="w-full bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border-4 border-purple-300 text-center flex flex-col gap-3 sm:gap-4 transition-all hover:shadow-2xl">
+            <div class="inline-block mx-auto bg-purple-100 text-purple-800 font-extrabold px-4 py-1.5 rounded-full text-xs sm:text-sm">
+                📚 المنهج الدراسي - لغتي
+            </div>
+            
+            <h2 class="text-xl sm:text-2xl font-black text-purple-900 leading-snug">
+                الوحدة الثانية: أصدقائي وجيراني
+            </h2>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-base sm:text-xl font-bold text-gray-700">
+                <span class="bg-sky-50 text-sky-800 border border-sky-200 px-4 py-2 rounded-2xl w-full sm:w-auto">
+                    📖 الدرس الثاني: الجار الصغير
+                </span>
+                <span class="bg-pink-50 text-pink-800 border border-pink-200 px-4 py-2 rounded-2xl w-full sm:w-auto">
+                    ✏️ مكون: أُحَوِّلُ
+                </span>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons Container -->
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
+            
+            <!-- Play Link Card -->
+            <a href="play.html" class="group bg-white/90 hover:bg-amber-400/90 backdrop-blur-md rounded-3xl p-6 shadow-xl border-4 border-amber-300 hover:border-amber-400 flex flex-col items-center text-center transition-all duration-300 transform hover:-translate-y-2 cursor-pointer">
+                <div class="w-20 h-20 bg-amber-100 group-hover:bg-white rounded-2xl flex items-center justify-center text-4xl mb-4 shadow-inner transition-colors animate-float">
+                    🎮
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-black text-amber-900 group-hover:text-amber-950 mb-2">
+                    صفحة اللَّعِب
+                </h3>
+                <p class="text-gray-600 group-hover:text-amber-950 font-bold text-xs sm:text-sm leading-relaxed">
+                    نشاط تفاعلي ممتع لسحب وإسقاط الكلمات المفردة والجمع مع تعزيز صوتي فوري!
+                </p>
+                <div class="mt-5 bg-amber-500 group-hover:bg-amber-950 text-white group-hover:text-amber-100 font-black px-6 py-2.5 rounded-xl shadow-md transition-all text-sm sm:text-base flex items-center gap-2">
+                    ابدأ اللعب الآن 👈
+                </div>
+            </a>
+
+            <!-- Test Link Card -->
+            <a href="test.html" class="group bg-white/90 hover:bg-purple-600/90 backdrop-blur-md rounded-3xl p-6 shadow-xl border-4 border-purple-300 hover:border-purple-500 flex flex-col items-center text-center transition-all duration-300 transform hover:-translate-y-2 cursor-pointer">
+                <div class="w-20 h-20 bg-purple-100 group-hover:bg-white rounded-2xl flex items-center justify-center text-4xl mb-4 shadow-inner transition-colors animate-float">
+                    📝
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-black text-purple-900 group-hover:text-white mb-2">
+                    صفحة التَّقْيِيم
+                </h3>
+                <p class="text-gray-600 group-hover:text-purple-100 font-bold text-xs sm:text-sm leading-relaxed">
+                    اختبار قياس مهارة التمييز بين المفرد والجمع مع تقييم نهائي وإظهار للنتيجة!
+                </p>
+                <div class="mt-5 bg-purple-600 group-hover:bg-white text-white group-hover:text-purple-900 font-black px-6 py-2.5 rounded-xl shadow-md transition-all text-sm sm:text-base flex items-center gap-2">
+                    الانتقال للاختبار 👈
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="w-full max-w-4xl text-center mt-4 text-gray-700 text-xs sm:text-sm font-bold flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-4 bg-white/70 backdrop-blur-sm py-3 px-4 rounded-2xl border border-purple-100 shadow-sm">
+        <span>صُمم خصيصاً لطالبات الصف الثاني الابتدائي الجميلات ✨</span>
+        <span class="hidden sm:inline text-purple-300">|</span>
+        <span class="text-purple-800 font-extrabold">معلمة المادة: فاطمة الحربي</span>
+    </footer>
+
+</body>
+</html>
