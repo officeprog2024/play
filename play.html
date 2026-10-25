@@ -40,14 +40,7 @@
       <a href="index.html" class="rounded-lg px-3 py-2 font-bold text-purple-800 hover:bg-purple-100 text-sm sm:text-base">🏠 الرئيسية</a>
       <a href="play.html" class="rounded-lg px-3 py-2 font-bold text-amber-800 hover:bg-amber-100 text-sm sm:text-base">🎮 اللعب</a>
       <a href="test.html" class="rounded-lg px-3 py-2 font-bold text-purple-800 hover:bg-purple-100 text-sm sm:text-base">📝 التقييم</a>
-      <details class="relative">
-        <summary class="list-none cursor-pointer rounded-lg px-3 py-2 font-bold text-gray-800 bg-gray-100 hover:bg-gray-200 text-sm sm:text-base">⚙️ إدارة الكلمات ▾</summary>
-        <div class="absolute left-0 mt-2 w-56 max-w-[85vw] rounded-xl border border-purple-200 bg-white p-2 shadow-xl flex flex-col gap-1">
-          <a href="play.html?manage=1" class="rounded-lg px-3 py-2 font-bold text-amber-800 hover:bg-amber-50">إدارة كلمات اللعب</a>
-          <a href="test.html?manage=1" class="rounded-lg px-3 py-2 font-bold text-purple-800 hover:bg-purple-50">إدارة كلمات التقييم</a>
-        </div>
-      </details>
-    </nav>
+</nav>
 <header class="w-full max-w-6xl flex flex-col justify-center items-center bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 sm:p-5 mb-3 sm:mb-4 border-2 border-pink-200 gap-2 text-right">
         <div class="w-full flex flex-col sm:flex-row justify-between items-center gap-3 border-b border-pink-100 pb-3">
             <div class="flex items-center gap-3">
@@ -116,66 +109,6 @@
         <span class="hidden sm:inline">|</span>
         <span class="text-purple-800 font-extrabold">معلمة المادة: فاطمة الحربي</span>
     </footer>
-
-    <!-- Password Modal -->
-    <div id="passwordModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-start justify-center p-3 sm:p-5 z-50 overflow-y-auto">
-        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border-4 border-purple-200 flex flex-col gap-4">
-            <h3 class="text-xl font-bold text-purple-800 text-center">🔑 إدخال رمز الدخول للإدارة</h3>
-            <p class="text-gray-600 text-sm text-center">الرمز الافتراضي هو: <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded font-bold">1234</span></p>
-            <input type="password" id="passwordInput" placeholder="أدخل رمز الدخول..." class="border-2 border-purple-300 rounded-2xl px-4 py-3 outline-none focus:border-purple-600 text-center text-lg font-bold">
-            <div class="flex gap-3 mt-2">
-                <button onclick="closePasswordModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-xl transition cursor-pointer">إلغاء</button>
-                <button onclick="verifyPassword()" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">دخول</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Admin Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-start justify-center p-2 sm:p-4 z-50 overflow-y-auto overscroll-contain">
-        <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 max-w-5xl w-full max-h-[92vh] overflow-y-auto overscroll-contain shadow-2xl border-4 border-purple-200 flex flex-col gap-3 sm:gap-4 my-1">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="text-xl sm:text-2xl font-black text-purple-800">⚙️ لوحة إدارة اللعبة والكلمات</h3>
-                <button onclick="closeAdminModal()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold cursor-pointer">&times;</button>
-            </div>
-
-            <!-- Edit Subtitle Activity Phrase -->
-            <div class="bg-purple-50 p-4 rounded-2xl border border-purple-200 flex flex-col gap-3">
-                <h4 class="font-bold text-purple-800 text-sm sm:text-base">تعديل عبارة عنوان النشاط الإثرائي:</h4>
-                <textarea id="subtitleInput" rows="2" class="bg-white border-2 border-purple-200 rounded-xl p-3 outline-none focus:border-purple-500 text-sm sm:text-base font-bold text-purple-900"></textarea>
-                <div class="flex flex-wrap gap-2 justify-end">
-                    <button onclick="restoreDefaultSubtitle()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm transition cursor-pointer">استعادة النص الافتراضي</button>
-                    <button onclick="saveSubtitle()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-1.5 rounded-xl text-xs sm:text-sm transition cursor-pointer">حفظ النص</button>
-                </div>
-            </div>
-
-            <!-- Add Word Form -->
-            <div class="bg-purple-50 p-4 rounded-2xl border border-purple-200 flex flex-col gap-3">
-                <h4 class="font-bold text-purple-800 text-sm sm:text-base">إضافة زوج كلمات جديد (مفرد وجمعه):</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <input type="text" id="newSingular" placeholder="كلمة المفرد (مثال: شجرة)" class="bg-white border-2 border-purple-200 rounded-xl px-3 py-2 outline-none focus:border-purple-500 text-sm sm:text-base">
-                    <input type="text" id="newPlural" placeholder="كلمة الجمع (مثال: أشجار)" class="bg-white border-2 border-purple-200 rounded-xl px-3 py-2 outline-none focus:border-purple-500 text-sm sm:text-base">
-                </div>
-                <button onclick="addNewWordPair()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl transition shadow cursor-pointer text-sm sm:text-base">حفظ الإضافة</button>
-            </div>
-
-            <!-- Words List Table -->
-            <div class="flex flex-col gap-2">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-gray-700 text-sm sm:text-base">الكلمات الحالية في اللعبة:</h4>
-                    <button onclick="restoreDefaultWords()" class="bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold px-3 py-1 rounded-xl text-xs sm:text-sm transition cursor-pointer">
-                        🔄 استعادة الكلمات الافتراضية
-                    </button>
-                </div>
-                <div class="max-h-52 overflow-y-auto border border-gray-200 rounded-2xl p-2 bg-gray-50 flex flex-col gap-2" id="adminWordsList">
-                    <!-- Populated dynamically -->
-                </div>
-            </div>
-
-            <div class="flex justify-end pt-2 border-t">
-                <button onclick="closeAdminModal()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-2 rounded-xl transition cursor-pointer text-sm sm:text-base">إغلاق وحفظ</button>
-            </div>
-        </div>
-    </div>
 
     <script>
         // Web Audio API sound generator for cheer/applause sound and error feedback
@@ -277,12 +210,8 @@
         const defaultWords = [
             { id: 1, singular: "قلم", plural: "أقلام" },
             { id: 2, singular: "كتاب", plural: "كتب" },
-            { id: 3, singular: "شجرة", plural: "أشجار" },
-            { id: 4, singular: "مدينة", plural: "مدن" },
-            { id: 5, singular: "مدرسة", plural: "مدارس" },
-            { id: 6, singular: "زهرة", plural: "أزهار" },
-            { id: 7, singular: "وردة", plural: "ورود" },
-            { id: 8, singular: "ولد", plural: "أولاد" }
+            { id: 3, singular: "وردة", plural: "ورود" },
+            { id: 4, singular: "ولد", plural: "أولاد" }
         ];
 
         let wordsData = [];
@@ -295,7 +224,6 @@
             loadSubtitleFromStorage();
             loadWordsFromStorage();
             initGame();
-            if (new URLSearchParams(window.location.search).get("manage") === "1") setTimeout(openAdminModal, 150);
         };
 
         function loadSubtitleFromStorage() {
@@ -324,28 +252,8 @@
         }
 
         function loadWordsFromStorage() {
-            const saved = localStorage.getItem('game_words_data');
-            if (saved) {
-                try {
-                    wordsData = JSON.parse(saved);
-                } catch(e) {
-                    wordsData = [...defaultWords];
-                }
-            } else {
-                wordsData = [...defaultWords];
-            }
-        }
-
-        function saveWordsToStorage() {
-            localStorage.setItem('game_words_data', JSON.stringify(wordsData));
-        }
-
-        function restoreDefaultWords() {
-            if (confirm('هل أنت متأكد من استعادة الكلمات الافتراضية؟ سيتم استبدال أي كلمات مضافة.')) {
-                wordsData = [...defaultWords];
-                saveWordsToStorage();
-                renderAdminWordsList();
-            }
+            // الكلمات ثابتة داخل ملفات الموقع ولا تُقرأ من تخزين المتصفح.
+            wordsData = defaultWords.map(word => ({ ...word }));
         }
 
         function initGame() {
@@ -493,90 +401,6 @@
             initGame();
         }
 
-        // Admin Management functions
-        function openAdminModal() {
-            document.getElementById('passwordModal').classList.remove('hidden');
-            document.getElementById('passwordModal').classList.add('flex');
-            document.getElementById('passwordInput').value = '';
-            document.getElementById('passwordInput').focus();
-        }
-
-        function closePasswordModal() {
-            document.getElementById('passwordModal').classList.remove('flex');
-            document.getElementById('passwordModal').classList.add('hidden');
-        }
-
-        function verifyPassword() {
-            const pass = document.getElementById('passwordInput').value;
-            if (pass === '1234') {
-                closePasswordModal();
-                showAdminDashboard();
-            } else {
-                alert('رمز الدخول غير صحيح! الرمز الافتراضي هو 1234');
-            }
-        }
-
-        function showAdminDashboard() {
-            document.getElementById('subtitleInput').value = document.getElementById('activitySubtitle').innerText;
-            renderAdminWordsList();
-            document.getElementById('adminModal').classList.remove('hidden');
-            document.getElementById('adminModal').classList.add('flex');
-        }
-
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.remove('flex');
-            document.getElementById('adminModal').classList.add('hidden');
-            initGame();
-        }
-
-        function renderAdminWordsList() {
-            const listContainer = document.getElementById('adminWordsList');
-            listContainer.innerHTML = '';
-
-            if (wordsData.length === 0) {
-                listContainer.innerHTML = '<p class="text-gray-400 text-center py-2 text-sm">لا توجد كلمات مضافة حالياً.</p>';
-                return;
-            }
-
-            wordsData.forEach((item) => {
-                const row = document.createElement('div');
-                row.className = 'flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-3 rounded-xl shadow-sm border border-gray-100 gap-2';
-                row.innerHTML = `
-                    <div class="flex gap-4 font-bold text-gray-800 text-sm sm:text-base">
-                        <span>مفرد: <span class="text-sky-600">${item.singular}</span></span>
-                        <span>جمع: <span class="text-pink-600">${item.plural}</span></span>
-                    </div>
-                    <button onclick="deleteWordPair(${item.id})" class="bg-red-100 hover:bg-red-200 text-red-600 font-bold px-3 py-1 rounded-lg text-xs sm:text-sm transition cursor-pointer">حذف</button>
-                `;
-                listContainer.appendChild(row);
-            });
-        }
-
-        function addNewWordPair() {
-            const sInput = document.getElementById('newSingular');
-            const pInput = document.getElementById('newPlural');
-            const sVal = sInput.value.trim();
-            const pVal = pInput.value.trim();
-
-            if (!sVal || !pVal) {
-                alert('الرجاء إدخال كلمة المفرد وكلمة الجمع معاً.');
-                return;
-            }
-
-            const newId = wordsData.length > 0 ? Math.max(...wordsData.map(w => w.id)) + 1 : 1;
-            wordsData.push({ id: newId, singular: sVal, plural: pVal });
-            saveWordsToStorage();
-
-            sInput.value = '';
-            pInput.value = '';
-            renderAdminWordsList();
-        }
-
-        function deleteWordPair(id) {
-            wordsData = wordsData.filter(w => w.id !== id);
-            saveWordsToStorage();
-            renderAdminWordsList();
-        }
-    </script>
+        </script>
 </body>
 </html>
