@@ -119,6 +119,11 @@
                 width: 56rem !important;
             }
         }
+
+        .embedded-game-frame {
+            color-scheme: light;
+            background: linear-gradient(135deg, #fff0f6, #f8f0fc, #e7f5ff);
+        }
     </style>
 </head>
 <body class="bg-soft-pattern app-container w-screen flex flex-col justify-between text-gray-800 relative overflow-hidden">
@@ -143,7 +148,7 @@
             <span class="text-[10px] sm:text-xs font-bold text-gray-500 hidden md:inline">الشريحة</span>
             <span id="slide-number" class="text-sm sm:text-base font-black text-pink-600">1</span>
             <span class="text-[10px] sm:text-xs font-bold text-gray-400">/</span>
-            <span id="total-slides" class="text-xs sm:text-xs font-bold text-gray-500">19</span>
+            <span id="total-slides" class="text-xs sm:text-xs font-bold text-gray-500">20</span>
             <button id="top-next-btn" onclick="nextSlide()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-pink-500 hover:bg-pink-600 text-white flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed" title="الشريحة التالية" aria-label="الشريحة التالية">
                 <i class="fa-solid fa-chevron-left text-[10px] sm:text-xs"></i>
             </button>
@@ -153,8 +158,31 @@
     <!-- Presentation Slides Container -->
     <main class="flex-1 min-h-0 w-full max-w-5xl mx-auto px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-center z-10 relative overflow-hidden">
 
-        <!-- Slide 1 -->
-        <div class="slide active w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-2 sm:p-4 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-hidden">
+        <!-- Slide 1: Editable lesson information -->
+        <div class="slide active w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-3 sm:p-4 bg-white/85 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-purple-100 shadow-xl relative overflow-hidden">
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-pink-100 to-purple-100 text-purple-700 flex items-center justify-center text-2xl sm:text-3xl shadow-inner mb-1 shrink-0" aria-hidden="true">
+                <i class="fa-solid fa-book-open-reader"></i>
+            </div>
+            <span class="rounded-full bg-purple-100 px-3 py-0.5 text-[10px] sm:text-xs font-black text-purple-700">لغتي الجميلة</span>
+            <h2 id="lesson-title" class="mt-1 text-2xl sm:text-3xl font-black text-pink-700">الجار الصغير</h2>
+            <div class="mt-2 grid w-full max-w-3xl grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-2">
+                <div class="rounded-xl border border-pink-200 bg-pink-50 px-3 py-1.5 text-xs sm:text-sm"><span class="font-black text-pink-700">اليوم:</span> <span id="lesson-day">—</span></div>
+                <div class="rounded-xl border border-purple-200 bg-purple-50 px-3 py-1.5 text-xs sm:text-sm"><span class="font-black text-purple-700">التاريخ:</span> <span id="lesson-date">—</span></div>
+                <div class="rounded-xl border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs sm:text-sm"><span class="font-black text-sky-700">الحصة:</span> <span id="lesson-period">—</span></div>
+            </div>
+            <div class="mt-2 w-full max-w-3xl space-y-1.5 text-sm sm:text-lg font-extrabold">
+                <p id="lesson-unit" class="rounded-xl bg-purple-50 px-4 py-1.5 text-purple-900 border border-purple-100">الوحدة الثانية: أصدقائي وجيراني</p>
+                <p id="lesson-name" class="rounded-xl bg-sky-50 px-4 py-1.5 text-sky-900 border border-sky-100">الدرس الثاني: الجار الصغير</p>
+                <p id="lesson-component" class="rounded-xl bg-pink-50 px-4 py-1.5 text-pink-900 border border-pink-100">مكون: أُحَوِّلُ</p>
+            </div>
+            <a href="index.html#lesson-info" class="mt-2 inline-flex items-center gap-2 rounded-xl bg-purple-700 px-4 py-1.5 text-[10px] sm:text-xs font-black text-white hover:bg-purple-800">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>تعديل معلومات الدرس من الصفحة الرئيسية</span>
+            </a>
+        </div>
+
+        <!-- Slide 2: Classroom rules -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-2 sm:p-4 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-hidden">
             <h2 class="sr-only">القوانين الصفية</h2>
             <img
                 src="assets/classroom-rules.jpeg"
@@ -249,11 +277,16 @@
             <span class="px-3 py-1 bg-indigo-100 text-indigo-600 font-bold rounded-full text-xs sm:text-sm mb-2">مسابقة وتحدي</span>
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-indigo-600 mb-2 sm:mb-3">لعبة العجلة (مراجعة)</h2>
             <p class="text-sm sm:text-lg font-bold text-pink-500 mb-3">أين قارئاتي المبدعات؟ ✨</p>
-            <a href="https://game.tahdiri.com/resource/1057721006" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 rounded-2xl bg-gradient-to-l from-indigo-600 to-purple-600 px-6 sm:px-9 py-3 text-base sm:text-lg font-black text-white shadow-lg shadow-purple-200 hover:scale-105 transition-transform">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                <span>افتحي لعبة العجلة</span>
-            </a>
-            <p class="mt-2 text-[10px] sm:text-xs font-semibold text-gray-500">تفتح اللعبة في تبويب جديد للحفاظ على موضعك في العرض</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
+                <a href="https://game.tahdiri.com/resource/1057721006" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 rounded-2xl bg-gradient-to-l from-indigo-600 to-purple-600 px-6 sm:px-9 py-3 text-base sm:text-lg font-black text-white shadow-lg shadow-purple-200 hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>افتحي لعبة العجلة</span>
+                </a>
+                <a href="https://game.tahdiri.com/resource/1057721006" target="_blank" rel="noopener noreferrer" class="rounded-xl bg-white p-1.5 shadow-md border border-indigo-100" title="فتح لعبة العجلة">
+                    <img src="assets/wheel-game-qr.png" alt="رمز QR لفتح لعبة العجلة" class="h-24 w-24 sm:h-28 sm:w-28">
+                </a>
+            </div>
+            <p class="mt-2 text-[10px] sm:text-xs font-semibold text-gray-500">امسحي الباركود أو افتحي اللعبة في تبويب جديد للحفاظ على موضعك في العرض</p>
         </div>
 
         <!-- Theatrical scene -->
@@ -275,17 +308,18 @@
         </div>
 
         <!-- Local singular and plural game -->
-        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-3 sm:p-5 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-hidden">
-            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center text-2xl sm:text-3xl mb-2 sm:mb-3 shadow-inner shrink-0">
-                <i class="fa-solid fa-gamepad"></i>
+        <div class="slide w-full h-full max-h-[75vh] flex-col items-center text-center p-2 sm:p-3 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-hidden">
+            <div class="w-full flex items-center justify-between gap-2 mb-2 shrink-0">
+                <div class="text-right">
+                    <span class="text-[10px] sm:text-xs font-black text-violet-600">تطبيق تفاعلي مضمّن</span>
+                    <h2 class="text-base sm:text-xl font-black text-violet-700">لعبة المفرد والجمع</h2>
+                </div>
+                <a href="./play.html" target="_blank" rel="noopener" class="inline-flex shrink-0 items-center gap-2 rounded-xl bg-gradient-to-l from-violet-600 to-pink-500 px-3 sm:px-5 py-2 text-xs sm:text-sm font-black text-white shadow-md hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>فتح في تبويب جديد</span>
+                </a>
             </div>
-            <span class="px-3 py-1 bg-violet-100 text-violet-700 font-bold rounded-full text-xs sm:text-sm mb-2">تطبيق تفاعلي</span>
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-violet-700 mb-2 sm:mb-3">لعبة المفرد والجمع</h2>
-            <p class="text-sm sm:text-base font-bold text-gray-600 mb-3">صنّفي الكلمات في المكان الصحيح</p>
-            <a href="./play.html" target="_blank" rel="noopener" class="inline-flex items-center gap-3 rounded-2xl bg-gradient-to-l from-violet-600 to-pink-500 px-7 sm:px-10 py-3 text-base sm:text-lg font-black text-white shadow-lg shadow-pink-200 hover:scale-105 transition-transform">
-                <i class="fa-solid fa-play"></i>
-                <span>ابدئي اللعبة</span>
-            </a>
+            <iframe src="./play.html?embedded=1" title="لعبة المفرد والجمع المضمّنة" class="embedded-game-frame block w-full flex-1 min-h-0 rounded-xl sm:rounded-2xl border-2 border-violet-100 shadow-inner" loading="lazy"></iframe>
         </div>
 
         <!-- Thinking and creativity -->
@@ -397,12 +431,39 @@
     </footer>
 
     <script>
-        let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const slideNumberDisplay = document.getElementById('slide-number');
         const totalSlidesDisplay = document.getElementById('total-slides');
+        const presentationProgressKey = 'lesson_presentation_slide_v1';
+        const lessonInfoStorageKey = 'lesson_info_v1';
+        const lessonInfoDefaults = {
+            day: '', hijriDate: '', period: '', title: 'الجار الصغير',
+            unit: 'الوحدة الثانية: أصدقائي وجيراني',
+            lesson: 'الدرس الثاني: الجار الصغير', component: 'مكون: أُحَوِّلُ'
+        };
+        const savedSlide = Number.parseInt(localStorage.getItem(presentationProgressKey), 10);
+        let currentSlide = Number.isInteger(savedSlide) ? Math.min(Math.max(savedSlide, 0), slides.length - 1) : 0;
 
         totalSlidesDisplay.textContent = slides.length;
+
+        function readLessonInfo() {
+            try {
+                return { ...lessonInfoDefaults, ...JSON.parse(localStorage.getItem(lessonInfoStorageKey) || '{}') };
+            } catch (error) {
+                return { ...lessonInfoDefaults };
+            }
+        }
+
+        function renderLessonInfo() {
+            const info = readLessonInfo();
+            document.getElementById('lesson-day').textContent = info.day || '—';
+            document.getElementById('lesson-date').textContent = info.hijriDate || '—';
+            document.getElementById('lesson-period').textContent = info.period || '—';
+            document.getElementById('lesson-title').textContent = info.title || lessonInfoDefaults.title;
+            document.getElementById('lesson-unit').textContent = info.unit || lessonInfoDefaults.unit;
+            document.getElementById('lesson-name').textContent = info.lesson || lessonInfoDefaults.lesson;
+            document.getElementById('lesson-component').textContent = info.component || lessonInfoDefaults.component;
+        }
 
         function updateSlide() {
             const resetPageScroll = () => {
@@ -421,6 +482,7 @@
             });
             
             slideNumberDisplay.textContent = currentSlide + 1;
+            localStorage.setItem(presentationProgressKey, String(currentSlide));
 
             const isFirstSlide = currentSlide === 0;
             const isLastSlide = currentSlide === slides.length - 1;
@@ -457,6 +519,7 @@
 
         function restartPresentation() {
             currentSlide = 0;
+            localStorage.removeItem(presentationProgressKey);
             updateSlide();
         }
 
@@ -503,6 +566,11 @@
             }
         }
 
+        window.addEventListener('storage', (event) => {
+            if (event.key === lessonInfoStorageKey) renderLessonInfo();
+        });
+
+        renderLessonInfo();
         updateSlide();
     </script>
 </body>

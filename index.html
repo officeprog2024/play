@@ -22,32 +22,55 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-pink-100 via-purple-100 to-sky-100 min-h-screen flex flex-col items-center justify-between px-4 pb-6 pt-20 sm:px-6 sm:pb-6 sm:pt-20">
-    <nav aria-label="التنقل بين صفحات الموقع" class="fixed top-0 inset-x-0 z-40 w-full max-w-none flex flex-wrap items-center justify-center gap-1 sm:gap-2 bg-white/95 backdrop-blur border-b border-purple-200 shadow-md p-2 sm:p-3 rounded-none">
-      <a href="index.html" class="rounded-lg px-3 py-2 font-bold text-purple-800 hover:bg-purple-100 text-sm sm:text-base">🏠 الرئيسية</a>
-      <a href="play.html" class="rounded-lg px-3 py-2 font-bold text-amber-800 hover:bg-amber-100 text-sm sm:text-base">🎮 اللعب</a>
-      <a href="test.html" class="rounded-lg px-3 py-2 font-bold text-purple-800 hover:bg-purple-100 text-sm sm:text-base">📝 التقييم</a>
+    <nav aria-label="التنقل بين صفحات الموقع" class="fixed top-0 inset-x-0 z-40 w-full max-w-none flex flex-nowrap items-center justify-start sm:justify-center gap-1 sm:gap-2 bg-white/95 backdrop-blur border-b border-purple-200 shadow-md p-2 sm:p-3 rounded-none overflow-x-auto">
+      <a href="index.html" class="shrink-0 whitespace-nowrap rounded-lg px-2 sm:px-3 py-2 font-bold text-purple-800 hover:bg-purple-100 text-xs sm:text-base">🏠 الرئيسية</a>
+      <a href="display.html" class="shrink-0 whitespace-nowrap rounded-lg px-2 sm:px-3 py-2 font-bold text-pink-800 hover:bg-pink-100 text-xs sm:text-base">🖥️ عرض الدرس</a>
+      <a href="play.html" class="shrink-0 whitespace-nowrap rounded-lg px-2 sm:px-3 py-2 font-bold text-amber-800 hover:bg-amber-100 text-xs sm:text-base">🎮 اللعب</a>
+      <a href="test.html" class="shrink-0 whitespace-nowrap rounded-lg px-2 sm:px-3 py-2 font-bold text-purple-800 hover:bg-purple-100 text-xs sm:text-base">📝 التقييم</a>
+      <a href="#lesson-info" class="shrink-0 whitespace-nowrap rounded-lg px-2 sm:px-3 py-2 font-bold text-sky-800 hover:bg-sky-100 text-xs sm:text-base">📚 معلومات الدرس</a>
     </nav>
 
     <!-- Main Content Section -->
     <main class="w-full max-w-6xl flex-1 flex flex-col items-center justify-center gap-6 sm:gap-8 my-4">
         
         <!-- Academic Info Card -->
-        <div class="w-full bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border-4 border-purple-300 text-center flex flex-col gap-3 sm:gap-4 transition-all hover:shadow-2xl">
+        <section id="lesson-info" class="w-full bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-8 shadow-xl border-4 border-purple-300 text-center flex flex-col gap-3 sm:gap-4 transition-all hover:shadow-2xl scroll-mt-24">
             <div class="inline-block mx-auto bg-purple-100 text-purple-800 font-extrabold px-4 py-1.5 rounded-full text-xs sm:text-sm">📚 المنهج الدراسي - لغتي</div>
-            
-            <h2 class="text-xl sm:text-2xl font-black text-purple-900 leading-snug">
-                الوحدة الثانية: أصدقائي وجيراني
-            </h2>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-base sm:text-xl font-bold text-gray-700">
-                <span class="bg-sky-50 text-sky-800 border border-sky-200 px-4 py-2 rounded-2xl w-full sm:w-auto">
-                    📖 الدرس الثاني: الجار الصغير
-                </span>
-                <span class="bg-pink-50 text-pink-800 border border-pink-200 px-4 py-2 rounded-2xl w-full sm:w-auto">
-                    ✏️ مكون: أُحَوِّلُ
-                </span>
+
+            <div>
+                <h2 class="text-xl sm:text-2xl font-black text-purple-900">معلومات الدرس</h2>
+                <p class="mt-1 text-xs sm:text-sm font-bold text-gray-500">عدّلي البيانات ثم احفظيها لتظهر تلقائيًا في الشريحة الأولى.</p>
             </div>
-        </div>
+
+            <form id="lesson-info-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-right">
+                <label class="font-bold text-sm text-purple-900">اليوم
+                    <input data-lesson-field="day" type="text" placeholder="مثال: الأحد" class="mt-1 w-full rounded-xl border-2 border-purple-100 bg-purple-50/60 px-3 py-2.5 outline-none focus:border-purple-400">
+                </label>
+                <label class="font-bold text-sm text-purple-900">التاريخ الهجري
+                    <input data-lesson-field="hijriDate" type="text" placeholder="مثال: ١٥ / ٥ / ١٤٤٨ هـ" class="mt-1 w-full rounded-xl border-2 border-purple-100 bg-purple-50/60 px-3 py-2.5 outline-none focus:border-purple-400">
+                </label>
+                <label class="font-bold text-sm text-purple-900">الحصة
+                    <input data-lesson-field="period" type="text" placeholder="مثال: الثالثة" class="mt-1 w-full rounded-xl border-2 border-purple-100 bg-purple-50/60 px-3 py-2.5 outline-none focus:border-purple-400">
+                </label>
+                <label class="font-bold text-sm text-purple-900">عنوان الدرس
+                    <input data-lesson-field="title" type="text" class="mt-1 w-full rounded-xl border-2 border-purple-100 bg-purple-50/60 px-3 py-2.5 outline-none focus:border-purple-400">
+                </label>
+                <label class="font-bold text-sm text-purple-900 sm:col-span-2">الوحدة
+                    <input data-lesson-field="unit" type="text" class="mt-1 w-full rounded-xl border-2 border-purple-100 bg-purple-50/60 px-3 py-2.5 outline-none focus:border-purple-400">
+                </label>
+                <label class="font-bold text-sm text-purple-900 sm:col-span-2">الدرس
+                    <input data-lesson-field="lesson" type="text" class="mt-1 w-full rounded-xl border-2 border-purple-100 bg-purple-50/60 px-3 py-2.5 outline-none focus:border-purple-400">
+                </label>
+                <label class="font-bold text-sm text-purple-900">المكوّن
+                    <input data-lesson-field="component" type="text" class="mt-1 w-full rounded-xl border-2 border-purple-100 bg-purple-50/60 px-3 py-2.5 outline-none focus:border-purple-400">
+                </label>
+                <div class="sm:col-span-2 lg:col-span-3 flex flex-wrap justify-center gap-2 pt-1">
+                    <button type="submit" class="rounded-xl bg-purple-700 px-6 py-2.5 font-black text-white shadow-md hover:bg-purple-800">حفظ معلومات الدرس</button>
+                    <button id="reset-lesson-info" type="button" class="rounded-xl bg-purple-100 px-5 py-2.5 font-black text-purple-800 hover:bg-purple-200">استعادة البيانات الأساسية</button>
+                </div>
+                <p id="lesson-info-status" class="hidden sm:col-span-2 lg:col-span-3 rounded-xl bg-green-50 px-4 py-2 text-center text-sm font-black text-green-700" role="status" aria-live="polite"></p>
+            </form>
+        </section>
 
     <!-- Header Section -->
     <header class="w-full max-w-6xl flex flex-col justify-center items-center bg-white/90 backdrop-blur-md shadow-lg rounded-3xl p-5 sm:p-6 mb-4 border-2 border-pink-200 text-center">
@@ -108,5 +131,57 @@
         <span class="text-purple-800 font-extrabold">معلمة المادة: فاطمة الحربي</span>
     </footer>
 
+    <script>
+        const lessonInfoDefaults = {
+            day: '',
+            hijriDate: '',
+            period: '',
+            title: 'الجار الصغير',
+            unit: 'الوحدة الثانية: أصدقائي وجيراني',
+            lesson: 'الدرس الثاني: الجار الصغير',
+            component: 'مكون: أُحَوِّلُ'
+        };
+        const lessonInfoStorageKey = 'lesson_info_v1';
+        const lessonInfoForm = document.getElementById('lesson-info-form');
+        const lessonInfoStatus = document.getElementById('lesson-info-status');
+
+        function readLessonInfo() {
+            try {
+                return { ...lessonInfoDefaults, ...JSON.parse(localStorage.getItem(lessonInfoStorageKey) || '{}') };
+            } catch (error) {
+                return { ...lessonInfoDefaults };
+            }
+        }
+
+        function fillLessonInfoForm(values) {
+            lessonInfoForm.querySelectorAll('[data-lesson-field]').forEach((input) => {
+                input.value = values[input.dataset.lessonField] || '';
+            });
+        }
+
+        function showLessonInfoStatus(message) {
+            lessonInfoStatus.textContent = message;
+            lessonInfoStatus.classList.remove('hidden');
+            window.setTimeout(() => lessonInfoStatus.classList.add('hidden'), 3500);
+        }
+
+        lessonInfoForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const values = { ...lessonInfoDefaults };
+            lessonInfoForm.querySelectorAll('[data-lesson-field]').forEach((input) => {
+                values[input.dataset.lessonField] = input.value.trim();
+            });
+            localStorage.setItem(lessonInfoStorageKey, JSON.stringify(values));
+            showLessonInfoStatus('تم الحفظ، وستظهر البيانات في الشريحة الأولى من عرض الدرس.');
+        });
+
+        document.getElementById('reset-lesson-info').addEventListener('click', () => {
+            localStorage.setItem(lessonInfoStorageKey, JSON.stringify(lessonInfoDefaults));
+            fillLessonInfoForm(lessonInfoDefaults);
+            showLessonInfoStatus('تمت استعادة البيانات الأساسية.');
+        });
+
+        fillLessonInfoForm(readLessonInfo());
+    </script>
 </body>
 </html>
