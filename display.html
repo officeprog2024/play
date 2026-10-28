@@ -143,7 +143,7 @@
             <span class="text-[10px] sm:text-xs font-bold text-gray-500 hidden md:inline">الشريحة</span>
             <span id="slide-number" class="text-sm sm:text-base font-black text-pink-600">1</span>
             <span class="text-[10px] sm:text-xs font-bold text-gray-400">/</span>
-            <span id="total-slides" class="text-xs sm:text-xs font-bold text-gray-500">19</span>
+            <span id="total-slides" class="text-xs sm:text-xs font-bold text-gray-500">24</span>
             <button id="top-next-btn" onclick="nextSlide()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-pink-500 hover:bg-pink-600 text-white flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed" title="الشريحة التالية" aria-label="الشريحة التالية">
                 <i class="fa-solid fa-chevron-left text-[10px] sm:text-xs"></i>
             </button>
@@ -185,6 +185,12 @@
             </div>
         </div>
 
+        <!-- Daily attendance -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-2 sm:p-3 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-hidden">
+            <h2 class="sr-only">طالبتي المنضبطة: أهمية الحضور اليومي</h2>
+            <img src="assets/attendance.jpeg" alt="طالبتي المنضبطة: حضورك اليومي وحرصك على الالتزام بالدوام يمنحك علمًا جديدًا وفرصًا للنجاح والتميز" class="block w-full h-full object-contain rounded-xl sm:rounded-2xl">
+        </div>
+
         <!-- Slide 2: Platform progress -->
         <div class="slide w-full h-full max-h-[75vh] flex-col items-center text-center p-2 sm:p-4 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-purple-100 shadow-xl relative overflow-hidden">
             <div class="w-full flex items-center justify-between gap-2 mb-2 shrink-0">
@@ -221,6 +227,12 @@
                 <button type="button" onclick="toggleReportZoom(this)" aria-pressed="false" class="rounded-full bg-emerald-100 px-3 py-1 text-emerald-700 hover:bg-emerald-200">🔍 تكبير</button>
                 <span>مرّري داخل الصورة لعرض التقرير كاملًا</span>
             </div>
+        </div>
+
+        <!-- Appreciation certificate -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-2 sm:p-3 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-purple-100 shadow-xl relative overflow-hidden">
+            <h2 class="sr-only">شهادة شكر وتقدير للطالبة فرح عيضة الزهراني</h2>
+            <img src="assets/appreciation-certificate.jpeg" alt="شهادة شكر وتقدير للطالبة فرح عيضة الزهراني لحرصها على منصة مدرستي والواجبات والاختبارات والأنشطة" class="block w-full h-full object-contain rounded-xl sm:rounded-2xl">
         </div>
 
         <!-- Slide 4 -->
@@ -272,6 +284,12 @@
         <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-2 sm:p-3 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-emerald-100 shadow-xl relative overflow-hidden">
             <h2 class="sr-only">حل الكتاب: تحويل الجمع إلى مفرد</h2>
             <img src="assets/book-solution.jpeg" alt="حل تمرين الكتاب بكتابة مفرد منازل وحرائق وأصدقاء ورجال وجيران" class="block w-full h-full object-contain rounded-xl sm:rounded-2xl">
+        </div>
+
+        <!-- Values discussion -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-2 sm:p-3 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-pink-100 shadow-xl relative overflow-hidden">
+            <h2 class="sr-only">حوار ونقاش لتعزيز القيم والاتجاهات التربوية</h2>
+            <img src="assets/values-discussion.jpeg" alt="حوار ونقاش عن التعامل مع الآخرين وحسن الخلق وقراءة القرآن الكريم والمحافظة على الذكر" class="block w-full h-full object-contain rounded-xl sm:rounded-2xl">
         </div>
 
         <!-- Local singular and plural game -->
@@ -358,6 +376,36 @@
         <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-2 sm:p-3 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-purple-100 shadow-xl relative overflow-hidden">
             <h2 class="sr-only">نشاط جماعي</h2>
             <img src="assets/group-activity.jpeg" alt="نشاط جماعي يقيس مهارات التفكير العليا من خلال مواقف عن الحريق والدفاع المدني" class="block w-full h-full object-contain rounded-xl sm:rounded-2xl">
+        </div>
+
+        <!-- Exit ticket -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-4 sm:p-7 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-orange-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-4 shadow-inner shrink-0">
+                <i class="fa-solid fa-person-running"></i>
+            </div>
+            <span class="px-3 py-1 bg-orange-100 text-orange-700 font-bold rounded-full text-xs sm:text-sm mb-2">تقويم ختامي حركي</span>
+            <h2 class="text-2xl sm:text-4xl font-black text-orange-600 mb-3">بطاقة الخروج: العب وتحرك</h2>
+            <div class="p-4 sm:p-6 bg-orange-50 rounded-2xl border border-orange-200 max-w-2xl w-full">
+                <p class="text-base sm:text-xl font-extrabold text-orange-900 leading-relaxed">إذا سمعتِ كلمةً مفردة فصفّقي مرة، وإذا سمعتِ كلمة جمع فصفّقي مرتين.</p>
+                <div class="mt-3 flex flex-wrap justify-center gap-2 text-sm sm:text-base font-black text-orange-700">
+                    <span class="px-3 py-1.5 bg-white rounded-xl shadow-sm">كتاب</span>
+                    <span class="px-3 py-1.5 bg-white rounded-xl shadow-sm">أقلام</span>
+                    <span class="px-3 py-1.5 bg-white rounded-xl shadow-sm">ولد</span>
+                    <span class="px-3 py-1.5 bg-white rounded-xl shadow-sm">ورود</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Homework -->
+        <div class="slide w-full h-full max-h-[75vh] flex-col justify-center items-center text-center p-5 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border-2 border-teal-100 shadow-xl relative overflow-y-auto">
+            <div class="w-14 h-14 sm:w-20 sm:h-20 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-2xl sm:text-4xl mb-3 sm:mb-5 shadow-inner shrink-0">
+                <i class="fa-solid fa-house-laptop"></i>
+            </div>
+            <span class="px-3 py-1 bg-teal-100 text-teal-700 font-bold rounded-full text-xs sm:text-sm mb-3">المتابعة المنزلية</span>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-teal-600 mb-3 sm:mb-4">الواجب الإلكتروني</h2>
+            <div class="p-4 sm:p-6 bg-teal-50 rounded-2xl border border-teal-200 max-w-xl w-full">
+                <p class="text-lg sm:text-2xl font-black text-teal-800">حل التدريب في منصة مدرستي 💻</p>
+            </div>
         </div>
 
         <!-- Slide 19: Performance task -->
